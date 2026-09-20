@@ -28,7 +28,7 @@ Rectangle {
 
         width: parent.width
         height: parent.width
-        opacity: 0.2
+        opacity: 0.1
 
         source: media.trackArtUrl
     }
@@ -188,7 +188,7 @@ Rectangle {
             implicitWidth: media ? 100 : 0
             implicitHeight: 5
 
-            color: color_dark
+            color: "transparent"
 
             Rectangle {
                 id: trackSeekerFill
