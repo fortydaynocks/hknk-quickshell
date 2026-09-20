@@ -6,8 +6,11 @@
 ---
 
 yeah, it's rather primitive so far... but i'm proud of it!
+
 at the time of writing, i have only been using EndeavourOS for 20 days...
 
 <img width="621" height="312" alt="image" src="https://github.com/user-attachments/assets/c7c2b701-4d34-412b-8bbe-31f208bf0e8b" />
 
 ...so if you have any feedback, tips or suggestions, they are all welcome!
+
+<sub>HKNK</sub>
