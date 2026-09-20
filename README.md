@@ -3,7 +3,7 @@
 <img width="1240" height="96" alt="image" src="https://github.com/user-attachments/assets/3247f107-30dc-461f-8789-46d4e6eb546e" />
 <sub>(21 september 2026, 12:22 am)</sub>
 
-<hl>
+---
 
 yeah, it's rather primitive so far... but i'm proud of it!
 at the time of writing, i have only been using EndeavourOS for 20 days...
