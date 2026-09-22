@@ -5,6 +5,7 @@ import Quickshell.Io
 import QtQuick // for Text
 
 import qs.bar
+import qs.cava
 
 Scope {
     id: root
@@ -29,7 +30,8 @@ Scope {
         bold: true,
         pointSize: 10
     })
-
+      
     //  GUESS WHAT THIS DOES...
     Bar {}
+    CavaVis {}
 }

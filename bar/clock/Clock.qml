@@ -3,7 +3,7 @@ import Quickshell.Io
 import QtQuick
 
 Rectangle {
-    id: rec
+    id: root
 
     implicitWidth: clock.width + 20
     implicitHeight: barHeight
@@ -11,7 +11,7 @@ Rectangle {
     color: color_bright
 
     Rectangle {
-        implicitWidth: parent.width * (1 - (ClockTimer.second / 60))
+        implicitWidth: parent.width * (1 - (Qt.formatDateTime(systemClock.date, "ss") / 60))
         implicitHeight: parent.height
 
         color: color_bright2
@@ -27,7 +27,6 @@ Rectangle {
     Text {
         id: clock
        
-
         property string time
         time: ClockTimer.time
 
@@ -37,6 +36,34 @@ Rectangle {
         font: normalFont
         color: color_bg
         
-        text: "󱑂 " + ClockTimer.time
+        text: "󱑂 " + Qt.formatDateTime(systemClock.date, "hh:mm AP")
+
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onEntered: {
+                clock.text = Qt.formatDateTime(systemClock.date, " dddd d MMMM yyyy")
+
+            }
+
+            onExited: {
+                clock.text = "󱑂 " + Qt.formatDateTime(systemClock.date, "hh:mm AP")
+
+            }
+        }
+    }
+
+    SystemClock {
+        id: systemClock
+        precision: SystemClock.Seconds
+        
+    }
+
+    Behavior on implicitWidth {
+        NumberAnimation {
+            easing.type: Easing.OutCirc
+            duration: 200
+        }
     }
 }

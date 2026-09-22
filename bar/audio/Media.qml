@@ -6,11 +6,13 @@ import QtQuick.Layouts
 import Quickshell.Services.Mpris
 
 import qs.components
+import qs.cava
 
 Rectangle {
     id: root
 
-    property var media: Mpris.players.values[Mpris.players.values.length - 1]
+    property var found_media: Mpris.players.values[Mpris.players.values.length - 1]
+    property var media: found_media
 
     property var media_position: media.position ? Math.floor(media.position / 60): 0
     property var media_length: media.length ? Math.floor(media.length / 60) : 0
@@ -23,11 +25,12 @@ Rectangle {
 
     clip: true
 
+    //  ===== BACKGROUND IMAGE! ==========
     Image {
         anchors.centerIn: parent
 
         width: parent.width
-        height: parent.width
+        height: parent.width / 2
         opacity: 0.1
 
         source: media.trackArtUrl
@@ -221,8 +224,25 @@ Rectangle {
             }
         }
 
-       // BracketRight { color: color_dark2 }
+        // BracketRight { color: color_dark2 }
+
+        //  CAVA!
+        CavaVis {
+            id: cava
+
+            implicitWidth: media.isPlaying ? 60 : 0
+            implicitHeight: root.height
+
+            Behavior on implicitWidth {
+                NumberAnimation {
+                    easing.type: Easing.OutCirc
+                    duration: 200
+                }
+            }
+        }
     }
+
+    onWidthChanged: popupWindow.anchor
 
     Behavior on implicitWidth {
         NumberAnimation {

@@ -13,7 +13,6 @@ import qs.bar.clock
 import qs.bar.hyprland
 import qs.bar.tray
 
-
 Scope {
     id: root
 
@@ -41,7 +40,10 @@ Scope {
 
                 margins.top: 8
                 implicitHeight: barHeight
+
                 color: "transparent"
+
+                //clip: false
 
                 //margins {
                    // top : 0
@@ -88,7 +90,7 @@ Scope {
                 Rectangle {
                     id: background2
 
-                    anchors.centerIn: parent
+                    y: 0
 
                     width: items_row.implicitWidth + extraWidth
                     height: barHeight
@@ -117,13 +119,13 @@ Scope {
                 RowLayout {
                     id: items_row
 
-                    anchors.centerIn: parent
+                    anchors.horizontalCenter: parent.horizontalCenter
                     spacing: 8
                     
                     //
                     BracketLeft {}
 
-                    Media {}
+                    Media { id: media }
                     Separator {}
                     Hypr {}
                     Separator {}
@@ -133,22 +135,6 @@ Scope {
                     Volume {}
 
                     BracketRight {}
-
-
-                    //SystemTray {
-                    //}
-                }
-
-                //Clock {
-                    //anchors.centerIn: parent
-                //}
-
-                RowLayout {
-                    anchors {right: parent.right; verticalCenter: parent.verticalCenter; rightMargin: 40
-                    }
-                    spacing: 30
-                    
-                    Separator { }
                 }
             }
         }
