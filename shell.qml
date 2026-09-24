@@ -17,7 +17,7 @@ Scope {
     property color color_bright2: '#a0a0a0'
     property color color_bright3: '#808080'
 
-    property color color_dark: "#191919"
+    property color color_dark: "#222222"
     property color color_dark2: "#444444"
     property color color_dark3: "#666666"
 

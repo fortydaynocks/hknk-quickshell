@@ -30,8 +30,8 @@ Rectangle {
     property string cavaConfig: [
 
         "[general]",
-        "autosens = 0",
-        "sensitivity = 1500",
+        "autosens = 1",
+        "sensitivity = 250",
         "bars = " + root.barCount,
         "framerate = 60",
 

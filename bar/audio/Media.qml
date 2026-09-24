@@ -242,8 +242,6 @@ Rectangle {
         }
     }
 
-    onWidthChanged: popupWindow.anchor
-
     Behavior on implicitWidth {
         NumberAnimation {
             easing.type: Easing.OutCirc

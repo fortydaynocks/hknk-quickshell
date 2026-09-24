@@ -10,13 +10,17 @@ Rectangle {
 
     color: color_bright
 
+    property string timeText: ""
+    property string dateText: ""
+    property int secondText: 0
+
     Rectangle {
-        implicitWidth: parent.width * (1 - (Qt.formatDateTime(systemClock.date, "ss") / 60))
+        implicitWidth: parent.width * (1 - (secondText / 60))
         implicitHeight: parent.height
 
         color: color_bright2
 
-        Behavior on width {
+        Behavior on implicitWidth {
             NumberAnimation {
                 easing.type: Easing.OutCirc
                 duration: 600
@@ -26,38 +30,72 @@ Rectangle {
 
     Text {
         id: clock
-       
-        property string time
-        time: ClockTimer.time
-
         anchors.centerIn: parent
-        
 
         font: normalFont
         color: color_bg
         
-        text: "󱑂 " + Qt.formatDateTime(systemClock.date, "hh:mm AP")
+        text: "󱑂 " + timeText
 
         MouseArea{
             anchors.fill: parent
             hoverEnabled: true
 
             onEntered: {
-                clock.text = Qt.formatDateTime(systemClock.date, " dddd d MMMM yyyy")
+                clock.text = "󱑂 " + dateText
 
             }
 
             onExited: {
-                clock.text = "󱑂 " + Qt.formatDateTime(systemClock.date, "hh:mm AP")
+                clock.text = "󱑂 " + timeText
 
             }
         }
     }
 
-    SystemClock {
-        id: systemClock
-        precision: SystemClock.Seconds
-        
+    Process {
+        id: timeProcess
+
+        command: ["bash", "-c", "date '+%I:%M %^p'"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: timeText = text
+        }
+    }
+
+    Process {
+        id: dateProcess
+
+        command: ["bash", "-c", "date '+%A %d %B %Y'"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: dateText = text
+        }
+    }
+
+    Process {
+        id: secondProcess
+
+        command: ["bash", "-c", "date +%S"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: secondText = text
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+
+        onTriggered: {
+            timeProcess.running = true
+            dateProcess.running = true
+            secondProcess.running = true
+        }
     }
 
     Behavior on implicitWidth {
