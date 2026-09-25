@@ -12,6 +12,7 @@ Rectangle {
 
     property string timeText: ""
     property string dateText: ""
+    property bool hovering: false
     property int secondText: 0
 
     Rectangle {
@@ -35,19 +36,19 @@ Rectangle {
         font: normalFont
         color: color_bg
         
-        text: "󱑂 " + timeText
+        text: hovering ? "󱑂 " + dateText : "󱑂 " + timeText
 
         MouseArea{
             anchors.fill: parent
             hoverEnabled: true
 
             onEntered: {
-                clock.text = "󱑂 " + dateText
+                hovering = true
 
             }
 
             onExited: {
-                clock.text = "󱑂 " + timeText
+                hovering = false
 
             }
         }

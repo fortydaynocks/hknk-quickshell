@@ -23,7 +23,7 @@ Item {
 
         "[general]",
         "autosens = 0",
-        "sensitivity = 1000",
+        "sensitivity = 1",
         "bars = " + root.barCount,
         "framerate = 60",
 

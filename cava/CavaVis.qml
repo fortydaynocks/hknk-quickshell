@@ -31,7 +31,7 @@ Rectangle {
 
         "[general]",
         "autosens = 1",
-        "sensitivity = 250",
+        "sensitivity = 100",
         "bars = " + root.barCount,
         "framerate = 60",
 
