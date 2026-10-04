@@ -1,20 +1,13 @@
+pragma Singleton
+
 import Quickshell
 import Quickshell.Io
 import QtQuick
 
-import QtQuick.Layouts
-
-import qs.bar.widgets
-
-Rectangle {
+Item {
     id: root
 
-    //anchors.fill: parent
-    color: "transparent"
-
-    clip: true
-
-    property int barCount: 12
+    property int barCount: 1
     property var barLevels: {
         let initialLevels = [];
 
@@ -25,13 +18,12 @@ Rectangle {
         }
         return initialLevels;
     }
-    
 
-    property string cavaConfig: [
+    readonly property string cavaConfig: [
 
         "[general]",
-        "autosens = 1",
-        "sensitivity = 100",
+        "autosens = 0",
+        "sensitivity = 1",
         "bars = " + root.barCount,
         "framerate = 60",
 
@@ -53,41 +45,7 @@ Rectangle {
         "noise_reduction = 10",
     ].join("\\n")
 
-    RowLayout {
-        id: layout
 
-        anchors.fill: parent
-        anchors.margins: 6
-
-
-        spacing: 1
-
-        Repeater {
-            model: barLevels
-
-            Item {
-                id: barContainer
-                width: 2
-                height: parent.height
-
-                Rectangle {
-                    anchors.bottom: parent.bottom
-
-                    implicitWidth: parent.width
-                    implicitHeight: Math.max(width, parent.height * modelData)
-
-                    color: theme.colorBright
-
-                    Behavior on height {
-                        NumberAnimation {
-                            duration: 10
-                            easing.type: EasingOutQuad
-                        }
-                    } 
-                }
-            }
-        }
-    }
 
     Process {
         id: cavaProcess
@@ -115,4 +73,6 @@ Rectangle {
             }
         }
     }
+
+
 }

@@ -1,307 +1,139 @@
+
 import Quickshell
 import Quickshell.Io
 import QtQuick
 
 import QtQuick.Layouts
 import QtQuick.Shapes
+import Quickshell.Widgets
 
-import qs.components
-
-import qs.bar.audio
-import qs.bar.bluetooth
-import qs.bar.clock
-import qs.bar.hyprland
-import qs.bar.tray
-
-import qs.popupItems
+import qs.bar.components
+import qs.bar.widgets
 
 Scope {
     id: root
 
-    property string clockText
-    property int barHeight: 24
-    property int popupBarHeight: 48
-    property int extraWidth: 16
+    //property string clockText
+    //property int barHeight: 24
+    //property int popupBarHeight: 48
+    //property int extraWidth: 16
     
-    property real popupItemScale: 0.8
-    property var dropped_down: false
+    //property real popupItemScale: 0.8
+    //property var dropped_down: false
+
+    property int barSize: 40
+    property int padding: 8
 
     //  OBJECTS
     Variants {
         model: Quickshell.screens;
 
         delegate: Component {
-            PanelWindow {
-                id: panel
-            
-                //  MULTI-SCREEN
+            Scope {
                 required property var modelData
-                screen: modelData
 
-                anchors {
-                    top: true
-                    left: true
-                    right: true
-                }
-
-                margins.top: 8
-                implicitHeight: barHeight
-
-                color: "transparent"
-
-                //clip: false
-
-                //margins {
-                   // top : 0
-                   // left: 500
-                    //right: 500
+                PanelWindow {   //  <=====  TOP BAR
+                    id: topPanel
+                    screen: modelData
                     
-                //}
-
-                //Rectangle {
-                    //anchors.centerIn: parent
-                    
-                   // width: 100
-                    //height: barHeight
-
-                    //color: "transparent"
-
-                    //Shape {
-                       // id: shape
-                        //property int point_length: 20
-
-                       // width: parent.width
-                        //height: parent.height
-
-                        //ShapePath {
-                          // strokeWidth: 1
-                           // fillColor: color_bright
-
-                           // PathLine { x: shape.x + shape.width; y: 0 }
-                           // PathLine { x: shape.x + shape.width + shape.point_length; y: shape.height / 2 }
-                           // PathLine { x: shape.x + shape.width; y: shape.height}
-                           // PathLine { x: shape.x; y: shape.height}
-                           // PathLine { x: shape.x - shape.point_length; y: shape.height / 2 }
-                           // PathLine { x: shape.x; y: 0 }
-                            
-                        //}
-                   // }
-
-                    //Clock {
-                        //anchors.centerIn: parent
-                        //color: color_bg
-                    //}
-                //}
-                
-                Rectangle {
-                    id: background2
-
-                    y: 0
-
-                    width: items_row.implicitWidth + extraWidth
-                    height: barHeight
-
-                    color: color_bg
-
-                    BracketLeft {
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        x: -14
-                        y: 0
-
-                        color: color_dark
+                    anchors {
+                        top: true
+                        left: true
+                        right: true
                     }
-
-                    BracketRight {
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        x: background2.width + 6
-                        y: 0
-
-                        color: color_dark
-                    }                
-                }
-                
-                RowLayout {
-                    id: items_row
-
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: 8
                     
-                    BracketLeft {}
-
-                    //  :::::   DROPDOWN    ::::: //
-
-                    Rectangle {
-                        id: dropdown
-
-                        implicitWidth: items_row.height
-                        implicitHeight: items_row.height 
-
-                        color: dropped_down ? color_dark2 : color_bright
-
-                        Text {
-                            anchors.fill: parent
-
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-
-                            font: normalFont
-                            color: dropped_down ? color_bright : color_bg
-
-                            text: dropped_down ? "" : ""
-
-                            Behavior on color {
-                                ColorAnimation {
-                                    easing.type: Easing.OutCirc
-                                    duration: 200
-                                }
-                            } 
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-
-                            onClicked: dropped_down = !dropped_down
-
-                            onEntered: {
-                                dropdown.opacity = 0.5
-
-                            }
-
-                            onExited: {
-                                dropdown.opacity = 1
-
-                            }
-                        }
-
-                        Behavior on color {
-                            ColorAnimation {
-                                easing.type: Easing.OutCirc
-                                duration: 200
-                            }
-                        } 
-                    }
-
-                    //  :::::   FIRST LEVEL WIDGETS :::::   //
-
-                    Media { id: media }
-                    Separator {}
-                    Hypr {}
-                    Separator {}
-                    Clock {}
-                    Separator {}
-                    Bluetooth {}
-                    Volume {}
-                    Separator {}
-                    SystemTray {}
-
-                    BracketRight {}
-                }
-
-                PopupWindow {
-                    id: popup
-                    anchor.window: panel
-
-                    property int pad: 32
-
-                    anchor.rect.x: items_row.x + (pad / 2)
-                    anchor.rect.y: items_row.y + items_row.height + 6
-
-                    implicitWidth: items_row.width - pad
-                    implicitHeight: dropped_down ? items_row.height * 2 : 1
-
-                    visible: dropped_down
-
-                    color: "transparent"
-
-                    Rectangle {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        implicitWidth: parent.width
-                        implicitHeight: parent.height / 2
-
-                        color: color_dark2
-
-                        Text {
-                            id: signature
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-
-                            font: normalFont
-                            color: color_dark
-
-                            text: " :: HKNK"
-                        }
+                    implicitHeight: barSize
+                    color: theme.colorBG
                     
+                    WrapperItem {
+                        anchors.left: parent.left
+                        implicitHeight: parent.height
+                        margin: padding
+
                         RowLayout {
-                            id: popupRow
+                            id: topLayout
 
                             anchors.centerIn: parent
-                            spacing: 4
+                            spacing: padding
                             
-                            //  :::::   SECOND LEVEL WIDGETS    :::::   //
-
-                            BracketLeft {color: color_dark3 }
-                            Spacer {}
-
+                            Cornerstone {}
+                            Hypr {}
                             
-                            Settings {}
-                            Terminal {}
-                            Folder {}
-                            Screenshot {}
-                            OBS {}
-                            Discord {}
-                            Steam {}
-
-                            Spacer {}
-                            BracketRight {color: color_dark3 }
                         }
                     }
 
-                    Rectangle {
-                        anchors.horizontalCenter: parent.horizontalCenter
+                    WrapperItem {
+                        anchors.centerIn: parent
+                        implicitHeight: parent.height
+                        margin: padding
 
-                        y: parent.height / 2
-                        implicitWidth: parent.width
-                        implicitHeight: parent.height / 2
-
-                        color: color_dark
-                    
                         RowLayout {
-                            id: popupRow2
+                            id: centerLayout
 
                             anchors.centerIn: parent
-                            spacing: 4
+                            spacing: padding
                             
-                            //  :::::   THIRD LEVEL WIDGETS    :::::   //
+                            Media {}
+                            Volume {}
+                            
+                        }
+                    }
 
-                            BracketLeft { color: color_dark2 }
-                            Spacer {}
+                    WrapperItem {
+                        anchors.right: parent.right
+                        implicitHeight: parent.height
+                        margin: padding
+
+                        RowLayout {
+                            id: rightLayout
+
+                            anchors.centerIn: parent
+                            spacing: padding
                             
-                            RAM {}
-                            Spacer {} Separator { color: color_dark2 } Spacer {}
-                            Disk {}
-                            Spacer {} Separator { color: color_dark2 } Spacer {}
+                            Tagline {}
+                            Hardware {}
+                            
+                        }
+                    }
+                }
+
+                PanelWindow {   //  <=====  TOP BAR
+                    id: sidePanel
+                    screen: modelData
+                    
+                    anchors {
+                        top: true
+                        bottom: true
+                        left: true
+                        
+                    }
+                    
+                    implicitWidth: barSize
+                    color: theme.colorBG
+                   
+                    WrapperItem {
+                        anchors.bottom: parent.bottom
+                        implicitWidth: parent.width
+                        margin: padding
+
+                        ColumnLayout {
+                            id: sideLayout
+
+                            anchors.centerIn: parent
+                            spacing: padding
+
+                            //WiFi {}
+                            //WiFi {}
                             WiFi {}
+                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "["; rotation: 90 }
+                            Clock {}
+                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "]"; rotation: 90 }
+                            Power {}
                             
-                            Spacer {}
-                            BracketRight { color: color_dark2 }
-                        }
-                    }
-
-                    Behavior on implicitHeight {
-                        NumberAnimation {
-                            easing.type: Easing.OutCirc
-                            duration: 200
                         }
                     }
                 }
             }
         }
     }
-    // ----- these are outside the Variant so they are not made every time the bar is duplicated.
-    
-    // CLOCK PROCESSES
-   
 }

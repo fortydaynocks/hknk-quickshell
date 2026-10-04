@@ -1,0 +1,23 @@
+{
+    "colorBG": "#000000",
+
+    "colorBright": "#d0d0c8",
+    "colorBright2": "#c0c0b8",
+    "colorBright3": "#a0a098",
+
+    "colorDark": "#20201b",
+    "colorDark2": "#40403b",
+    "colorDark3": "#60605b",
+
+    "colorAccent": "#ff0044",
+    "colorAcent2": "#FF4677",
+    "colorAccent3": "#FF6D94",
+
+    "colorBlack": "#000000",
+    "colorWhite": "#ffffff",
+    "colorRed": "#ff5050",
+
+    "fontFamily": "JetBrainsMono Nerd Font Propo",
+    "fontBold": true,
+    "fontSize": 10
+}

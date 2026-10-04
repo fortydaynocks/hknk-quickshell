@@ -4,7 +4,7 @@ import QtQuick
 
 import QtQuick.Layouts
 
-import qs.bar.widgets
+import qs.bar.audio
 
 Rectangle {
     id: root
@@ -76,7 +76,7 @@ Rectangle {
                     implicitWidth: parent.width
                     implicitHeight: Math.max(width, parent.height * modelData)
 
-                    color: theme.colorBright
+                    color: color_bright
 
                     Behavior on height {
                         NumberAnimation {
