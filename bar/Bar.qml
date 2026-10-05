@@ -22,7 +22,8 @@ Scope {
     //property var dropped_down: false
 
     property int barSize: 40
-    property int padding: 8
+    property int padding: 6
+    property int borderWidth: 2
 
     //  OBJECTS
     Variants {
@@ -45,6 +46,17 @@ Scope {
                     implicitHeight: barSize
                     color: theme.colorBG
                     
+                    Rectangle {
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        
+                        implicitWidth: (topPanel.width - sidePanel.width) + borderWidth
+                        implicitHeight: borderWidth
+
+                        color: theme.colorBright
+
+                    }
+
                     WrapperItem {
                         anchors.left: parent.left
                         implicitHeight: parent.height
@@ -110,7 +122,38 @@ Scope {
                     
                     implicitWidth: barSize
                     color: theme.colorBG
+
+                    Rectangle {
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        
+                        implicitWidth: borderWidth
+                        implicitHeight: sidePanel.height
+
+                        color: theme.colorBright
+
+                    }
                    
+                    WrapperItem {
+                        anchors.centerIn: parent
+                        implicitWidth: parent.width
+                        margin: padding
+
+                        ColumnLayout {
+                            id: middleLayout
+
+                            anchors.centerIn: parent
+                            spacing: padding
+
+                            //WiFi {}
+                            //WiFi {}
+                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "["; rotation: 90 }
+                            Clock {}
+                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "]"; rotation: 90 }
+                            
+                        }
+                    }
+
                     WrapperItem {
                         anchors.bottom: parent.bottom
                         implicitWidth: parent.width
@@ -122,12 +165,10 @@ Scope {
                             anchors.centerIn: parent
                             spacing: padding
 
-                            //WiFi {}
-                            //WiFi {}
+                            
+                            SystemTray {}
                             WiFi {}
-                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "["; rotation: 90 }
-                            Clock {}
-                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "]"; rotation: 90 }
+                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "::"; rotation: 90 }
                             Power {}
                             
                         }

@@ -41,69 +41,9 @@ Rectangle {
         id: row
 
         anchors.centerIn: parent
-        spacing: 5
+        spacing: 8
 
-        Rectangle {
-            id: playerIcon
-
-            implicitWidth: playerIconLabel.width + 16
-            implicitHeight: barSize - 8
-
-            color: media.isPlaying ? theme.colorBright : theme.colorDark
-
-            Text {
-                id: playerIconLabel
-
-                anchors.centerIn: parent
-
-                font: normalFont
-                color: media.isPlaying ? theme.colorDark : theme.colorBright
-                text: (media.trackTitle && media.isPlaying) ? "" : ""
-
-                Behavior on color {
-                    ColorAnimation {
-                        easing.type: Easing.OutCirc
-                        duration: 200
-                    }
-                }
-            }
-
-            MouseArea{
-                anchors.fill: parent
-
-                hoverEnabled: true
-
-                onClicked: function(mouse) {
-                   if (mouse.button == Qt.LeftButton) {
-                       media.isPlaying = !media.isPlaying
-                    }
-                }
-
-                onEntered: {
-                    playerIcon.opacity = 0.5
-
-                }
-
-                onExited: {
-                    playerIcon.opacity = 1
-
-                }
-            }
-
-            Behavior on color {
-                ColorAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 200
-                }
-            }
-
-            Behavior on opacity {
-                NumberAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 200
-                }
-            }
-        }
+        Spacer { Layout.alignment: Qt.AlignHCenter; text: " [ "}
 
         //  ===== INFO! ==========
         Text {
@@ -111,7 +51,24 @@ Rectangle {
 
             font: normalFont
             color: theme.colorBright
-            text: media.trackArtist || "?"
+            text: "󰝚 " +  media.trackArtist || "?"
+        }
+
+        
+
+        //  CAVA!
+        CavaVis {
+            id: cava
+
+            implicitWidth: media.isPlaying ? 60 : 0
+            implicitHeight: root.height
+
+            Behavior on implicitWidth {
+                NumberAnimation {
+                    easing.type: Easing.OutCirc
+                    duration: 200
+                }
+            }
         }
 
         Rectangle {
@@ -134,7 +91,7 @@ Rectangle {
                 font: normalFont
                 color: theme.colorDark
 
-                text: media.trackTitle || ""
+                text: media.trackTitle.split("-")[media.trackTitle.split("-").length - 1].trim() || ""
             }
 
             //  ===== SKIP! ==========
@@ -180,62 +137,49 @@ Rectangle {
             }
         }
 
-        BracketLeft { color: theme.colorDark2 }
+        Spacer { Layout.alignment: Qt.AlignHCenter; text: " ] "}
+
+        //BracketLeft { color: theme.colorDark2 }
 
         //  ===== SEEKER ==========
-        Rectangle {
-            id: trackSeeker
+        //Rectangle {
+        //    id: trackSeeker
 
-            implicitWidth: media ? 100 : 0
-            implicitHeight: 5
+        //    implicitWidth: media ? 100 : 0
+        //   implicitHeight: 5
 
-            color: "transparent"
+        //    color: "transparent"
 
-            Rectangle {
-                id: trackSeekerFill
+        //    Rectangle {
+        //        id: trackSeekerFill
 
-                implicitWidth: (parent.width) * (media.position / media.length)
-                implicitHeight: parent.height
+        //        implicitWidth: (parent.width) * (media.position / media.length)
+        //        implicitHeight: parent.height
 
-                color: theme.colorBright
-            }
-        }
+        //        color: theme.colorBright
+        //    }
+        //}
 
-        BracketRight { color: theme.colorDark2 }
+        //BracketRight { color: theme.colorDark2 }
 
-        Text {
-            id: trackTime
+        //Text {
+        //    id: trackTime
 
-            property var text_format: media_position + ":" + media_position_remainder.toString().padStart(2, "0") //+ " - " + media_length + ":" + media_length_remainder.toString().padStart(2, "0")
+        //    property var text_format: media_position + ":" + media_position_remainder.toString().padStart(2, "0") //+ " - " + media_length + ":" + media_length_remainder.toString().padStart(2, "0")
 
-            font: normalFont
+        //    font: normalFont
 
-            color: theme.colorDark3
-            text: media ? text_format : ""
+        //    color: theme.colorDark3
+        //    text: media ? text_format : ""
 
-            Timer {
-                running: media.playbackState == MprisPlaybackState.Playing
-                interval: 100
-                repeat: true
+        //    Timer {
+        //        running: media.playbackState == MprisPlaybackState.Playing
+        //        interval: 100
+        //        repeat: true
 
-                onTriggered: media.positionChanged()
-            }
-        }
-
-        //  CAVA!
-        CavaVis {
-            id: cava
-
-            implicitWidth: media.isPlaying ? 60 : 0
-            implicitHeight: root.height
-
-            Behavior on implicitWidth {
-                NumberAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 200
-                }
-            }
-        }
+        //        onTriggered: media.positionChanged()
+        //    }
+        //}
     }
 
     Behavior on implicitWidth {

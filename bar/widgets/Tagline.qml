@@ -10,6 +10,6 @@ Text {
     font: normalFont
     color: theme.colorDark2
     
-    text: "// I AM A SEEKER OF THE DIVINE"
+    text: "// THE LORD OF TERROR"
 }
 
