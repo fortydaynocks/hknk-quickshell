@@ -58,7 +58,7 @@ RowLayout {
            // easing.type: Easing.InExpo
         }
 
-        //PauseAnimation { duration: 800 }
+        PauseAnimation { duration: 800 }
 
         ScriptAction {
            script: {
@@ -96,6 +96,8 @@ RowLayout {
             typer.start()
         }
     }
+
+    Component.onCompleted: typer.start()
 }
 
 
