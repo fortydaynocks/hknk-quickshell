@@ -86,7 +86,7 @@ Scope {
                             spacing: padding
                             
                             Media {}
-                            Volume {}
+                            
                             
                         }
                     }
@@ -103,6 +103,8 @@ Scope {
                             spacing: padding
                             
                             Tagline {}
+                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "::"}
+                            Volume {}
                             Hardware {}
                             
                         }

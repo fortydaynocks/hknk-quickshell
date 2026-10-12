@@ -24,7 +24,6 @@ Rectangle {
         anchors.centerIn: parent
         spacing: padding
 
-        Spacer { Layout.alignment: Qt.AlignHCenter; text: "::"}
         HardwarePart {value: diskValue}
         HardwarePart {value: ramValue}
     }

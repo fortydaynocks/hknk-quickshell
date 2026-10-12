@@ -32,12 +32,10 @@ RowLayout {
     }
 
     Text {
-      
-
         id: tagLabel
 
         font: normalFont
-        color: theme.colorDark2
+        color: theme.colorDark3
         
         text: tagtext.substring(0, visible_chars)
     }
@@ -58,13 +56,38 @@ RowLayout {
            // easing.type: Easing.InExpo
         }
 
-        PauseAnimation { duration: 800 }
+        PauseAnimation { duration: 1600 }
 
         ScriptAction {
            script: {
             changeText()
             type2.start()
            }
+        }
+    }
+
+    SequentialAnimation {
+        id: tagLabelFade
+        loops: Animation.Infinite
+
+        NumberAnimation {
+            target: tagLabel
+            property: "opacity"
+            
+            from: 1
+            to: 0
+
+            duration: 1200
+        }
+
+        NumberAnimation {
+            target: tagLabel
+            property: "opacity"
+            
+            from: 0
+            to: 1
+
+            duration: 1200
         }
     }
 
@@ -88,7 +111,7 @@ RowLayout {
     
    
     Timer {
-        interval: 60000
+        interval: 120000
         running: true
         repeat: true
 
@@ -97,7 +120,10 @@ RowLayout {
         }
     }
 
-    Component.onCompleted: typer.start()
+    Component.onCompleted: {
+        typer.start()
+        tagLabelFade.start()
+    }
 }
 
 

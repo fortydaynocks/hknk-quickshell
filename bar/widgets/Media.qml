@@ -95,7 +95,7 @@ Rectangle {
             }
 
             //  ===== SKIP! ==========
-            MouseArea{
+            MouseArea {
                 anchors.fill: parent
 
                 hoverEnabled: true
