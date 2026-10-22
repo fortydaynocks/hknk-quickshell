@@ -71,7 +71,7 @@ Rectangle {
                 height: parent.height
 
                 Rectangle {
-                    anchors.bottom: parent.bottom
+                    anchors.verticalCenter: parent.verticalCenter
 
                     implicitWidth: parent.width
                     implicitHeight: Math.max(width, parent.height * modelData)

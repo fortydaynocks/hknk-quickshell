@@ -2,66 +2,60 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import Quickshell.Widgets
 import QtQuick.Layouts
+
 import Quickshell.Hyprland
 
-RowLayout {
-    spacing: 6
+ColumnLayout {
+    id: root
+    spacing: padding * 2
+
+    property var activeColor: theme.colors.accent
+
+    Layout.alignment: Qt.AlignHCenter
 
     Repeater {
         model: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-         Rectangle {
+        Rectangle {
             id: rec
 
-            required property int index
-            required property string modelData
+            property var id: Hyprland.focusedWorkspace.name[modelData]
+            property var workspaceData: Hyprland.workspaces.values.find(w => w.id == modelData)
+            property bool isThisWindow: Hyprland.focusedWorkspace.name ? modelData == Hyprland.focusedWorkspace.name : false
 
-            property int workspace_id: index + 1
-            property var workspace_data: Hyprland.workspaces.values.find(w => w.id == workspace_id)
-            property bool is_this_window: workspace_id == Hyprland.focusedWorkspace.name
+            implicitWidth: barSize * 0.15
+            implicitHeight: barSize * 0.15
 
-            implicitWidth: workspace_data ? topLayout.height : topLayout.height / 4
-            implicitHeight: workspace_data ? topLayout.height / 4 : topLayout.height / 4
-            
-            color: workspace_data ? (is_this_window ? theme.colorBright : theme.colorDark2) : theme.colorDark
+            rotation: 45
 
-            //Text {
-                //anchors.centerIn: parent
+            color: isThisWindow ? activeColor : (workspaceData ? theme.colors.dark3 : theme.colors.dark1)
+        }
+    }
 
-                //font: normalFont
+    SequentialAnimation {
+        id: animColor
+        loops: Animation.Infinite
+        running: true
 
-                //color: Hyprland.focusedWorkspace.urgent ? theme.colorRed : is_this_window ? theme.colorDark : theme.colorDark2
-                //text: modelData.id
+        ColorAnimation {
+            target: root
+            property: "activeColor"
 
-                //Behavior on color {
-                    //ColorAnimation {
-                        //easing.type: Easing.OutCirc
-                        //duration: 600
-                    //}
-                //}
-            //}
+            from: theme.colors.accent
+            to: theme.colors.accent2
 
-            Behavior on color {
-                ColorAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 600
-                }
-            }
+            duration: 600
+        }
+        ColorAnimation {
+            target: root
+            property: "activeColor"
 
-            Behavior on implicitWidth {
-                NumberAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 200
-                }
-            }
+            from: theme.colors.accent2
+            to: theme.colors.accent
 
-            Behavior on implicitHeight {
-                NumberAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 200
-                }
-            }
-        }   
+            duration: 600
+        }
     }
 }

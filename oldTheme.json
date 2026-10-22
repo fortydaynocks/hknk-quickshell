@@ -1,0 +1,28 @@
+{
+    "colors": {
+        "bg": "#111122",
+        "stroke": "#111122",
+
+        "dark1": "#333344",
+        "dark2": "#555566",
+        "dark3": "#777788",
+
+        "accent": "#7777ff",
+        "accent2": "#ffffff",
+        "accentdark": "#555599",
+
+        "white": "#ffffff",
+        "black": "#000000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

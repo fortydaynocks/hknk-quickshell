@@ -1,105 +1,64 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
-import QtQuick.Controls
+
+import QtQuick.Layouts
 
 import Quickshell.Services.Pipewire
 
 Rectangle {
-    id: rec
+    id: root
 
-    property int volume_value: Math.round(Pipewire.defaultAudioSink.audio.volume * 100)
-    property bool volume_muted: Pipewire.defaultAudioSink.audio.muted
+    property int volumeValue: Math.round(Pipewire.defaultAudioSink.audio.volume * 100)
+    property bool volumeMuted: Pipewire.defaultAudioSink.audio.muted
 
-    implicitWidth: volume.implicitWidth + 20
-    implicitHeight: parent.height
+    implicitWidth: label.width + padding
+    implicitHeight: barSize * 0.5
 
-    color: volume_muted ? theme.colorDark : theme.colorDark
+    color: !volumeMuted ? theme.colors.accent : theme.colors.dark1
 
     Text {
-        id: volume
+        id: label
         anchors.centerIn: parent
 
-        color: volume_muted ? theme.colorBright3 : theme.colorBright
         font: normalFont
-        text: volume_muted ? "  MUTED" : "  " + (rec.volume_value ?? 0) + "%"
-
-        Behavior on color {
-            ColorAnimation {
-                easing.type: Easing.OutCirc
-                duration: 300
-            }
-        }
-
-        MouseArea {
-            id: volumeScroll
-            anchors.fill: parent
-
-            hoverEnabled: true
-
-            onClicked: function(mouse) {
-                if (mouse.button == Qt.LeftButton) {
-                    Pipewire.defaultAudioSink.audio.muted = !Pipewire.defaultAudioSink.audio.muted
-                }
-            }
-
-            onWheel: function(wheel) {
-                if (!Pipewire.defaultAudioSink.audio.muted) {
-                    var dist = wheel.angleDelta.y / 2400
-                    Pipewire.defaultAudioSink.audio.volume += dist
-                }
-            }
-
-            onEntered: {
-                rec.opacity = 0.5
-
-            }
-
-            onExited: {
-                rec.opacity = 1
-
-            }
-        }
+        color: !volumeMuted ? theme.colors.dark1 : theme.colors.dark3
+        
+        text: volumeMuted ? " MUTED" : " " + (volumeValue ?? 0)
     }
 
-     //  -----   -----
-    Behavior on implicitWidth {
-        NumberAnimation {
-            easing.type: Easing.OutCirc
-            duration: 300
-        }
-    }
+    MouseArea {
+        id: volumeScroll
+        anchors.fill: parent
 
-     Behavior on color {
-        ColorAnimation {
-            easing.type: Easing.OutCirc
-            duration: 300
-        }
-    }
+        hoverEnabled: true
 
-    Behavior on opacity {
-        NumberAnimation {
-            easing.type: Easing.OutCirc
-            duration: 200
+        onClicked: function(mouse) {
+            if (mouse.button == Qt.LeftButton) {
+                Pipewire.defaultAudioSink.audio.muted = !Pipewire.defaultAudioSink.audio.muted
+            }
+        }
+
+        onWheel: function(wheel) {
+            if (!Pipewire.defaultAudioSink.audio.muted) {
+                var dist = wheel.angleDelta.y / 2400
+                Pipewire.defaultAudioSink.audio.volume += dist
+            }
+        }
+
+        onEntered: {
+            root.opacity = 0.5
+
+        }
+
+        onExited: {
+            root.opacity = 1
+
         }
     }
 
     //  ----- IMPORTANT FOR VOLUME DETECTION!
     PwObjectTracker {
         objects: [Pipewire.defaultAudioSink]
-    }
-    
-    Rectangle {
-        id: tray
-
-        x: rec.width
-
-        width: 0
-        height: barSize
-
-        color: theme.colorBright
-    }
-
-    onVolume_valueChanged: {
     }
 }

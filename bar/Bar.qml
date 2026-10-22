@@ -7,25 +7,17 @@ import QtQuick.Layouts
 import QtQuick.Shapes
 import Quickshell.Widgets
 
-import qs.bar.components
 import qs.bar.widgets
 
 Scope {
     id: root
 
-    //property string clockText
-    //property int barHeight: 24
-    //property int popupBarHeight: 48
-    //property int extraWidth: 16
-    
-    //property real popupItemScale: 0.8
-    //property var dropped_down: false
+    property int barSize: 42
+    property int borderSize: 24
 
-    property int barSize: 40
-    property int padding: 6
-    property int borderWidth: 2
+    property int padding: 4
+    property int strokeWidth: 2
 
-    //  OBJECTS
     Variants {
         model: Quickshell.screens;
 
@@ -33,146 +25,91 @@ Scope {
             Scope {
                 required property var modelData
 
-                PanelWindow {   //  <=====  TOP BAR
-                    id: topPanel
-                    screen: modelData
-                    
-                    anchors {
-                        top: true
-                        left: true
-                        right: true
-                    }
-                    
-                    implicitHeight: barSize
-                    color: theme.colorBG
-                    
-                    Rectangle {
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        
-                        implicitWidth: (topPanel.width - sidePanel.width) + borderWidth
-                        implicitHeight: borderWidth
-
-                        color: theme.colorBright
-
-                    }
-
-                    WrapperItem {
-                        anchors.left: parent.left
-                        implicitHeight: parent.height
-                        margin: padding
-
-                        RowLayout {
-                            id: topLayout
-
-                            anchors.centerIn: parent
-                            spacing: padding
-                            
-                            Cornerstone {}
-                            Hypr {}
-                            
-                        }
-                    }
-
-                    WrapperItem {
-                        anchors.centerIn: parent
-                        implicitHeight: parent.height
-                        margin: padding
-
-                        RowLayout {
-                            id: centerLayout
-
-                            anchors.centerIn: parent
-                            spacing: padding
-                            
-                            Media {}
-                            
-                            
-                        }
-                    }
-
-                    WrapperItem {
-                        anchors.right: parent.right
-                        implicitHeight: parent.height
-                        margin: padding
-
-                        RowLayout {
-                            id: rightLayout
-
-                            anchors.centerIn: parent
-                            spacing: padding
-                            
-                            Tagline {}
-                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "::"}
-                            Volume {}
-                            Hardware {}
-                            
-                        }
-                    }
+                PanelWindow { screen: modelData; anchors.top: true; anchors.bottom: true; anchors.left: true; implicitWidth: borderSize; color: theme.colors.bg
+                    Rectangle { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
+                }
+                PanelWindow { screen: modelData; anchors.top: true; anchors.bottom: true; anchors.right: true; implicitWidth: borderSize; color: theme.colors.bg
+                    Rectangle { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
+                }
+                PanelWindow { screen: modelData; anchors.top: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
+                    Rectangle { anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: parent.width; implicitHeight: strokeWidth; color: theme.colors.stroke }
+                
+                    StuffTop {}
+                }
+                PanelWindow { screen: modelData; anchors.bottom: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
+                    Rectangle { anchors.top: parent.top; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: parent.width; implicitHeight: strokeWidth; color: theme.colors.stroke }
+                
+                    StuffBottom {}
                 }
 
-                PanelWindow {   //  <=====  TOP BAR
-                    id: sidePanel
+                PanelWindow {
                     screen: modelData
-                    
-                    anchors {
-                        top: true
-                        bottom: true
-                        left: true
-                        
-                    }
-                    
+
+                    anchors.top: true
+                    anchors.bottom: true
+                    anchors.left: true
+
                     implicitWidth: barSize
-                    color: theme.colorBG
 
+                    color: "transparent"
+                    
                     Rectangle {
+                        anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        
-                        implicitWidth: borderWidth
-                        implicitHeight: sidePanel.height
 
-                        color: theme.colorBright
+                        implicitWidth: parent.width - padding
+                        implicitHeight: parent.height - (padding * 2)
 
-                    }
-                   
-                    WrapperItem {
-                        anchors.centerIn: parent
-                        implicitWidth: parent.width
-                        margin: padding
+                        border.width: strokeWidth
+                        border.color: theme.colors.stroke
 
-                        ColumnLayout {
-                            id: middleLayout
+                        color: theme.colors.bg
 
-                            anchors.centerIn: parent
-                            spacing: padding
+                        WrapperItem {
+                            anchors.fill: parent
+                            margin: padding
 
-                            //WiFi {}
-                            //WiFi {}
-                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "["; rotation: 90 }
-                            Clock {}
-                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "]"; rotation: 90 }
-                            
-                        }
-                    }
+                            ColumnLayout {
+                                implicitWidth: parent.width
+                                spacing: padding
+                                
+                                ColumnLayout {
+                                    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                                    implicitWidth: parent.width
+                                    spacing: padding
+                                    
+                                    Item {}
+                                    Menu { Layout.alignment: Qt.AlignHCenter }
+                                    Item {}
+                                    Time {}
+                                    Notifs {}
+                                    Separator { text: ""; color: theme.colors.dark2; Layout.alignment: Qt.AlignHCenter }
+                                }
 
-                    WrapperItem {
-                        anchors.bottom: parent.bottom
-                        implicitWidth: parent.width
-                        margin: padding
+                                ColumnLayout {
+                                    //Layout.alignment: Qt.AlignCenter
+                                    anchors.centerIn: parent
+                                    implicitWidth: parent.width
+                                    spacing: padding
 
-                        ColumnLayout {
-                            id: sideLayout
+                                    Hypr {}
+                                }
 
-                            anchors.centerIn: parent
-                            spacing: padding
+                                ColumnLayout {
+                                    spacing: padding
+                                    Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
 
-                            
-                            SystemTray {}
-                            WiFi {}
-                            Spacer { Layout.alignment: Qt.AlignHCenter; text: "::"; rotation: 90 }
-                            Power {}
-                            
+                                    Media {}
+
+                                    //WiFi {}
+                                    //Bluetooth {}
+                                    Separator { text: ""; color: theme.colors.dark2; Layout.alignment: Qt.AlignHCenter }
+                                    SystemTray {}
+                                    Separator { text: ""; color: theme.colors.dark2; Layout.alignment: Qt.AlignHCenter }
+                                    Power {}
+                                    Item {}
+                                }
+                            }
                         }
                     }
                 }

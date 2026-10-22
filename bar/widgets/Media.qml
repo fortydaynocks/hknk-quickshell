@@ -2,190 +2,181 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import Quickshell.Widgets
 import QtQuick.Layouts
+
 import Quickshell.Services.Mpris
 
-import qs.bar.components
-import qs.cava
+import qs.bar.widgets
 
-Rectangle {
+ColumnLayout {
     id: root
 
-    property var found_media: Mpris.players.values[Mpris.players.values.length - 1]
-    property var media: found_media
+    property real averageLoudness: 0
+    property int barCount: 5
+    property string cavaConfig: [
 
-    property var media_position: media.position ? Math.floor(media.position / 60): 0
-    property var media_length: media.length ? Math.floor(media.length / 60) : 0
-    property var media_position_remainder: media.position ? Math.floor(media.position % 60) : 00
-    property var media_length_remainder: media.length ? Math.floor(media.length % 60) : 00
+        "[general]",
+        "autosens = 1",
+        "sensitivity = 100",
+        "bars = " + barCount,
+        "framerate = 60",
 
-    implicitWidth: media ? row.width: 0
-    implicitHeight: parent.height
-    color: "transparent"
+        "ower_cutoff_freq = 50",
+        "igher_cutoff_freq = 20000",
+
+        "[output]",
+        "method = raw",
+        "raw_target = /dev/stdout",
+        "data_format = ascii",
+        "ascii_max_range = 1000",
+        "bar_delimiter = 59",   //  A SEMICOLON
+
+        "channels = mono",
+
+        "[smoothing]",
+        "monstercat = 1",
+        "waves = 0",
+        "noise_reduction = 10",
+    ].join("\\n")
+
+    
+    property var foundMedia: Mpris.players.values[Mpris.players.values.length - 1]
+    property var media: foundMedia
+    
+    property string trackName: media.trackTitle
+    property string trackMarqueeName: ""
+    property int trackMarqueeIndex: 0
+    property int trackMarqueeAddition: 15
+    property string usedTrackTitle: media.trackTitle
+    
+    property string trackArt: media.trackArtUrl
+
+    Layout.alignment: Qt.AlignHCenter
+    implicitWidth: parent.width
+    spacing: padding
 
     clip: true
 
-    //  ===== BACKGROUND IMAGE! ==========
-    Image {
-        anchors.centerIn: parent
+    ColorQuantizer {
+        id: colorQ
+        source: trackArt
 
-        width: parent.width
-        height: parent.width / 2
-        opacity: 0
-
-        source: media.trackArtUrl
+        depth: 1
+        rescaleSize: 32
     }
+    
+    Rectangle {
+        implicitWidth: parent.width
+        implicitHeight: trackTitle.implicitWidth + (padding * 2)
 
-    //  ===== PLAY - PAUSE! ==========
-    RowLayout {
-        id: row
+        color: "transparent"
 
-        anchors.centerIn: parent
-        spacing: 8
+        Rectangle {
 
-        Spacer { Layout.alignment: Qt.AlignHCenter; text: " [ "}
+            anchors.fill: parent
+            color: colorQ.colors[0]
+            opacity: 0.4
+        }
 
-        //  ===== INFO! ==========
         Text {
-            id: artistLabel
+            id: trackTitle
+            anchors.centerIn: parent
+            rotation: -90
 
             font: normalFont
-            color: theme.colorBright
-            text: "󰝚 " +  media.trackArtist || "?"
+            color: colorQ.colors[1]
+            text: usedTrackTitle + " ::" || ""
         }
 
         
+    }
 
-        //  CAVA!
-        CavaVis {
-            id: cava
+    Item {}
 
-            implicitWidth: media.isPlaying ? 60 : 0
-            implicitHeight: root.height
+    Rectangle {
+        id: disc
 
-            Behavior on implicitWidth {
-                NumberAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 200
+        implicitWidth: root.width
+        implicitHeight: root.width
+        radius: width * 0.5
+
+        color: theme.colors.stroke
+
+        ClippingWrapperRectangle {
+            id: discImage
+
+            anchors.fill: parent
+            radius: parent.radius
+
+            color: theme.colors.stroke
+
+            Image {
+                anchors.fill: parent
+                source: trackArt
+            }
+
+            Timer {
+                interval: 50
+                repeat: true
+                running: true
+
+                onTriggered: {
+                    //discImage.opacity = 0.5
+                    
+                    if (media && media.isPlaying) {
+                        disc.rotation += 4
+                        //discImage.opacity = 1
+                    }
                 }
             }
         }
 
         Rectangle {
-            id: trackLabelBG
-
-            implicitWidth: trackLabel.implicitWidth + 8
-            implicitHeight: 16 //trackLabel.height
+            anchors.centerIn: parent
             
-            color: theme.colorBright
-           // border.color: color
+            implicitWidth: parent.width * 0.25
+            implicitHeight: parent.height* 0.25
+            radius: width * 0.5
 
-            clip: true
-
-            Text {
-                id: trackLabel
-                anchors.fill: parent
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-
-                font: normalFont
-                color: theme.colorDark
-
-                text: media.trackTitle.split("-")[media.trackTitle.split("-").length - 1].trim() || ""
-            }
-
-            //  ===== SKIP! ==========
-            MouseArea {
-                anchors.fill: parent
-
-                hoverEnabled: true
-                acceptedButtons: Qt.LeftButton | Qt.RightButton
-
-                onClicked: function(mouse) {
-                    if (mouse.button == Qt.LeftButton) {
-                       media.next()
-                    }
-                    else if (mouse.button == Qt.RightButton) {
-                       media.previous()
-                    }
-                }
-
-                onWheel: function(wheel) {
-                    if (media && media.canSeek && media.positionSupported) {
-                        var dist = wheel.angleDelta.y / 60
-                        media.position += dist
-
-                    }
-                }
-
-                onEntered: {
-                    trackLabelBG.opacity = 0.5
-
-                }
-
-                onExited: {
-                    trackLabelBG.opacity = 1
-
-                }
-            }
-
-            Behavior on opacity {
-                NumberAnimation {
-                    easing.type: Easing.OutCirc
-                    duration: 200
-                }
-            }
+            color: theme.colors.black
         }
-
-        Spacer { Layout.alignment: Qt.AlignHCenter; text: " ] "}
-
-        //BracketLeft { color: theme.colorDark2 }
-
-        //  ===== SEEKER ==========
-        //Rectangle {
-        //    id: trackSeeker
-
-        //    implicitWidth: media ? 100 : 0
-        //   implicitHeight: 5
-
-        //    color: "transparent"
-
-        //    Rectangle {
-        //        id: trackSeekerFill
-
-        //        implicitWidth: (parent.width) * (media.position / media.length)
-        //        implicitHeight: parent.height
-
-        //        color: theme.colorBright
-        //    }
-        //}
-
-        //BracketRight { color: theme.colorDark2 }
-
-        //Text {
-        //    id: trackTime
-
-        //    property var text_format: media_position + ":" + media_position_remainder.toString().padStart(2, "0") //+ " - " + media_length + ":" + media_length_remainder.toString().padStart(2, "0")
-
-        //    font: normalFont
-
-        //    color: theme.colorDark3
-        //    text: media ? text_format : ""
-
-        //    Timer {
-        //        running: media.playbackState == MprisPlaybackState.Playing
-        //        interval: 100
-        //        repeat: true
-
-        //        onTriggered: media.positionChanged()
-        //    }
-        //}
     }
 
-    Behavior on implicitWidth {
-        NumberAnimation {
-            easing.type: Easing.OutCirc
-            duration: 400
+    Connections {
+        target: media
+
+        function onTrackArtUrlChanged () {
+            console.log(media.trackArtUrl)
+
+            var newArt = media.trackArtUrl
+            if (newArt && newArt !== "") { trackArt = newArt }
+        }
+    }
+
+    Timer {
+        interval: 150
+        running: true
+        repeat: true
+
+        property int maxTrackNameLength: 14
+        property int trackNameIndex: 0
+        property int marqueeSpacing: 10
+
+        onTriggered: {
+            if (media.trackTitle.length > maxTrackNameLength) {
+                var fullTrackTitle = media.trackTitle + " ".repeat(maxTrackNameLength)
+                usedTrackTitle = fullTrackTitle.substr(trackNameIndex, maxTrackNameLength)
+
+                if (trackNameIndex > media.trackTitle.length) {
+                    usedTrackTitle += fullTrackTitle.substr(0, trackNameIndex - media.trackTitle.length)
+                }
+                
+                trackNameIndex = (trackNameIndex + 1) % fullTrackTitle.length
+            } else {
+                usedTrackTitle = media.trackTitle
+                trackNameIndex = 0
+            }
         }
     }
 }

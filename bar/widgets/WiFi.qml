@@ -2,15 +2,14 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-import Quickshell.Networking
+import QtQuick.Layouts
 
 Rectangle {
     id: root
 
-    implicitWidth: parent.width
-    implicitHeight: parent.width
+    implicitWidth: barSize * 0.5
+    implicitHeight: barSize * 0.5
 
-    radius: parent.width / 4
     color: "transparent"
 
     Text {
@@ -18,24 +17,8 @@ Rectangle {
         anchors.centerIn: parent
 
         font: normalFont
-        color: theme.colorBright
+        color: theme.colors.accent2
         
-        text: "󰤨"
-        z: 2
+        text: "󰖩"
     }
-
-    //PopupWindow {
-        //id: popup
-        //anchor.item: root
-
-       // anchor.rect.x: barSize + padding
-       // anchor.rect.y: -root.height
-        
-       // implicitWidth: 100
-        //implicitHeight: 200
-
-        //color: theme.colorBright
-        
-       // visible: true
-   // }
 }

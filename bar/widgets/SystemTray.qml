@@ -5,24 +5,22 @@ import QtQuick.Layouts
 
 import Quickshell.Services.SystemTray
 
-import qs.bar.components
+import qs.bar
 
 
 Rectangle {
     id: root
 
     implicitWidth: parent.width
-    implicitHeight: layout.height + 16
+    implicitHeight: layout.height + padding
 
-    radius: width / 4
-    color: theme.colorDark
-
+    color: "transparent"
 
     ColumnLayout {
         id: layout
         anchors.centerIn: parent
 
-        spacing: 8
+        spacing: padding * 2
 
         Repeater {
             model: SystemTray.items
@@ -34,8 +32,8 @@ Rectangle {
                 verticalAlignment: Image.AlignVCenter
 
                 source: modelData.icon
-                sourceSize.width: 20
-                sourceSize.height: 20
+                sourceSize.width: barSize * 0.5
+                sourceSize.height: barSize * 0.5
 
                 PopupWindow {
                     id: itemWindow

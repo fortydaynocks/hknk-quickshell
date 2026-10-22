@@ -9,7 +9,7 @@ Singleton {
 
     FileView {
         id: themeJson
-        path: Qt.resolvedUrl("./theme.json")
+        path: Quickshell.shellPath("../myTheme.json")
 
         watchChanges: true
         blockLoading: true
@@ -20,26 +20,18 @@ Singleton {
     readonly property var theme: JSON.parse(themeJson.text())
 
     property var normalFont: Qt.font({
-        family: theme.fontFamily,
-        bold: theme.fontBold,
-        pointSize: theme.fontSize
+        family: theme.font.family,
+        bold: theme.font.bold,
+        pointSize: theme.font.size
     })
-
-    property var bigFont: Qt.font({
-        family: theme.fontFamily,
-        bold: theme.fontBold,
-        pointSize: theme.fontSize + 4
-    })
-
-    property var lightFont: Qt.font({
-        family: theme.fontFamily,
-        bold: false,
-        pointSize: theme.fontSize
-    })
-
     property var smallFont: Qt.font({
-        family: theme.fontFamily,
-        bold: theme.fontBold,
-        pointSize: theme.fontSize - 2
+        family: theme.fontSmall.family,
+        bold: theme.fontSmall.bold,
+        pointSize: theme.fontSmall.size
+    })
+    property var bigFont: Qt.font({
+        family: theme.font.family,
+        bold: theme.font.bold,
+        pointSize: theme.font.size + 4
     })
 }

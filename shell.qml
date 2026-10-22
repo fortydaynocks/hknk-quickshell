@@ -1,11 +1,12 @@
+
 //@ pragma UseQApplication
+// must remain commented. used for system tray functionality.
 
 import Quickshell
 import Quickshell.Io
 import QtQuick
 
 import qs.bar
-//import qs.cava
 
 Scope {
     id: root
@@ -18,7 +19,6 @@ Scope {
     property var smallFont: Theme.smallFont
     property var bigFont: Theme.bigFont
     
-    //  GUESS WHAT THIS DOES...
+    //  OBJECTS
     Bar {}
-    //CavaVis {}
 }
