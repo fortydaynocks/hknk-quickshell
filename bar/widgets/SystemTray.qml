@@ -32,8 +32,8 @@ Rectangle {
                 verticalAlignment: Image.AlignVCenter
 
                 source: modelData.icon
-                sourceSize.width: barSize * 0.5
-                sourceSize.height: barSize * 0.5
+                sourceSize.width: barSize * 0.4
+                sourceSize.height: barSize * 0.4
 
                 PopupWindow {
                     id: itemWindow
@@ -83,8 +83,5 @@ Rectangle {
                 }
             }
         }
-
-        
-}
-
+    }
 }

@@ -1,0 +1,32 @@
+{
+    "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-x6vkvd.png",
+    "menuIcon": "",
+
+    "colors": {
+        "bg": "#bb000007",
+        "stroke": "#444466",
+
+        "dark1": "#333355",
+        "dark2": "#444466",
+        "dark3": "#555577",
+
+        "accent": "#3377ff",
+        "accent2": "#ffffff",
+        "accentdark": "#334477",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

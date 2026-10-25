@@ -40,56 +40,107 @@ ColumnLayout {
         "noise_reduction = 10",
     ].join("\\n")
 
-    
-    property var foundMedia: Mpris.players.values[Mpris.players.values.length - 1]
-    property var media: foundMedia
-    
-    property string trackName: media.trackTitle
-    property string trackMarqueeName: ""
-    property int trackMarqueeIndex: 0
-    property int trackMarqueeAddition: 15
-    property string usedTrackTitle: media.trackTitle
-    
-    property string trackArt: media.trackArtUrl
+    property var maxTitleLength: 150
 
     Layout.alignment: Qt.AlignHCenter
     implicitWidth: parent.width
     spacing: padding
 
+    visible: media != null
     clip: true
 
-    ColorQuantizer {
-        id: colorQ
-        source: trackArt
-
-        depth: 1
-        rescaleSize: 32
+    Text {
+         font: normalFont
+        color: Qt.lighter(getMediaColorsAdj()[1], 1.5) || theme.colors.accent
+        text: "::"
     }
     
-    Rectangle {
+    Item {
+        id: trackLabelLimits
+
         implicitWidth: parent.width
-        implicitHeight: trackTitle.implicitWidth + (padding * 2)
+        implicitHeight: Math.min(trackLabel.implicitWidth, maxTitleLength) //mediaTitle.implicitWidth + (padding * 2)
 
-        color: "transparent"
+        clip: true
 
-        Rectangle {
+       Text {
+            id: trackLabel
 
-            anchors.fill: parent
-            color: colorQ.colors[0]
-            opacity: 0.4
-        }
+            property real scrollFactor: 20
+            property int pauseFactor: 2
 
-        Text {
-            id: trackTitle
-            anchors.centerIn: parent
+            property var lengthDifference: (trackLabelLimits.height - implicitWidth) || 0
+            property var idkWhyThisValueIsNeeded: trackLabelLimits.height - 10
+
             rotation: -90
 
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 1
+            y: 180
+            horizontalAlignment: Text.AlignLeft
+
             font: normalFont
-            color: colorQ.colors[1]
-            text: usedTrackTitle + " ::" || ""
+            color: Qt.lighter(getMediaColorsAdj()[1], 1.5) || theme.colors.accent
+            text: mediaTitle
+
+            Timer {
+                interval: 1000
+                running: true
+                repeat: true
+
+                onTriggered: {
+                    trackLabel.lengthDifference = trackLabelLimits.height - trackLabel.implicitWidth || 0
+
+                }
+            }
+
+            onLengthDifferenceChanged: {
+                if (lengthDifference < 0 )  {
+                    scrollAnim.restart()
+                } else {
+                    scrollAnim.stop()
+                    trackLabel.y = idkWhyThisValueIsNeeded
+                    
+                }
+            }
+
+            SequentialAnimation {
+                id: scrollAnim
+                running: true
+                loops: Animation.Infinite
+
+                NumberAnimation { target: trackLabel; property: "y"; from: trackLabel.idkWhyThisValueIsNeeded; to: -(trackLabel.lengthDifference - trackLabel.idkWhyThisValueIsNeeded); duration: Math.abs(trackLabel.lengthDifference) * trackLabel.scrollFactor; easing.type: Easing.Linear }
+                PauseAnimation { duration: trackLabel.pauseFactor * 1000 }
+                NumberAnimation { target: trackLabel; property: "y"; from: -(trackLabel.lengthDifference - trackLabel.idkWhyThisValueIsNeeded); to: trackLabel.idkWhyThisValueIsNeeded; duration: Math.abs(trackLabel.lengthDifference) * trackLabel.scrollFactor; easing.type: Easing.Linear }
+                PauseAnimation { duration: trackLabel.pauseFactor * 1000 }
+            }
         }
 
-        
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton 
+            hoverEnabled: true
+
+            onClicked: function(mouse) {
+                if (mouse.button == Qt.LeftButton) {
+                    media.isPlaying = !media.isPlaying
+                } else if (mouse.button == Qt.RightButton) {
+                    media.next()
+                } else if (mouse.button == Qt.MiddleButton) {
+                    media.stop()
+                }
+            }
+
+            onEntered: {
+                root.opacity = 0.5
+
+            }
+
+            onExited: {
+                root.opacity = 1
+
+            }
+        }
     }
 
     Item {}
@@ -101,7 +152,7 @@ ColumnLayout {
         implicitHeight: root.width
         radius: width * 0.5
 
-        color: theme.colors.stroke
+        color: mediaArt ? "transparent" : theme.colors.accent2
 
         ClippingWrapperRectangle {
             id: discImage
@@ -109,11 +160,11 @@ ColumnLayout {
             anchors.fill: parent
             radius: parent.radius
 
-            color: theme.colors.stroke
+            color: "transparent"
 
             Image {
                 anchors.fill: parent
-                source: trackArt
+                source: mediaArt
             }
 
             Timer {
@@ -122,11 +173,11 @@ ColumnLayout {
                 running: true
 
                 onTriggered: {
-                    //discImage.opacity = 0.5
+                    discImage.opacity = 0.5
                     
                     if (media && media.isPlaying) {
                         disc.rotation += 4
-                        //discImage.opacity = 1
+                        discImage.opacity = 1
                     }
                 }
             }
@@ -139,44 +190,7 @@ ColumnLayout {
             implicitHeight: parent.height* 0.25
             radius: width * 0.5
 
-            color: theme.colors.black
-        }
-    }
-
-    Connections {
-        target: media
-
-        function onTrackArtUrlChanged () {
-            console.log(media.trackArtUrl)
-
-            var newArt = media.trackArtUrl
-            if (newArt && newArt !== "") { trackArt = newArt }
-        }
-    }
-
-    Timer {
-        interval: 150
-        running: true
-        repeat: true
-
-        property int maxTrackNameLength: 14
-        property int trackNameIndex: 0
-        property int marqueeSpacing: 10
-
-        onTriggered: {
-            if (media.trackTitle.length > maxTrackNameLength) {
-                var fullTrackTitle = media.trackTitle + " ".repeat(maxTrackNameLength)
-                usedTrackTitle = fullTrackTitle.substr(trackNameIndex, maxTrackNameLength)
-
-                if (trackNameIndex > media.trackTitle.length) {
-                    usedTrackTitle += fullTrackTitle.substr(0, trackNameIndex - media.trackTitle.length)
-                }
-                
-                trackNameIndex = (trackNameIndex + 1) % fullTrackTitle.length
-            } else {
-                usedTrackTitle = media.trackTitle
-                trackNameIndex = 0
-            }
+            color: theme.colors.bg
         }
     }
 }

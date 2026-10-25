@@ -18,9 +18,9 @@ RowLayout {
             anchors.centerIn: parent
 
             font: normalFont
-            color: theme.colors.bg
+            color: theme.colors.accent2
             
-            text: "󰤆"
+            text: ""
 
             Behavior on color {
                 ColorAnimation {

@@ -3,14 +3,39 @@ import Quickshell.Io
 import QtQuick
 
 import QtQuick.Layouts
+import Quickshell.Services.Pipewire
 
 RowLayout {
     id: root
 
     anchors.centerIn: parent
 
+    property int volumeValue: Math.round(Pipewire.defaultAudioSink.audio.volume * 100)
+    property bool volumeMuted: Pipewire.defaultAudioSink.audio.muted
+
+    property string netValue: ""
     property string ramValue: ""
     property string diskValue: ""
+
+    Text {
+        font: normalFont
+        color: theme.colors.accent2
+        textFormat: Text.RichText
+        text: !volumeMuted ? volumeValue + "% <font color=" + theme.colors.dark2 + ">VOL</font>"
+        : " <font color=" + theme.colors.dark1 + ">AUDIO MUTED</font>"
+    }
+
+    Separator { text: "|"; color: theme.colors.dark2 }
+
+    Text {
+        id: netLabel
+        font: normalFont
+        color: theme.colors.accent
+        textFormat: Text.RichText
+        text: netValue + " <font color=" + theme.colors.dark2 + ">NET</font>"
+    }
+
+    Separator { text: "|"; color: theme.colors.dark2 }
 
     Text {
         id: ramLabel
@@ -29,6 +54,27 @@ RowLayout {
 
         textFormat: Text.RichText
         text: diskValue + " <font color=" + theme.colors.dark2 + ">DISK</font>"
+    }
+
+
+
+
+
+
+
+
+
+
+
+    Process {
+        id: netProcess
+
+        command: ["bash", "-c", "nmcli | awk 'NR==1 {print $4}'"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: netValue = text.trim()
+        }
     }
 
     Process {
@@ -62,5 +108,10 @@ RowLayout {
             ramProcess.running = true
             diskProcess.running = true
         }
+    }
+
+    //  ----- IMPORTANT FOR VOLUME DETECTION!
+    PwObjectTracker {
+        objects: [Pipewire.defaultAudioSink]
     }
 }

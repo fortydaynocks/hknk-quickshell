@@ -8,12 +8,13 @@ import QtQuick.Shapes
 import Quickshell.Widgets
 
 import qs.bar.widgets
+import qs.bar.menu
 
 Scope {
     id: root
 
     property int barSize: 42
-    property int borderSize: 24
+    property int borderSize: 20
 
     property int padding: 4
     property int strokeWidth: 2
@@ -25,25 +26,28 @@ Scope {
             Scope {
                 required property var modelData
 
-                PanelWindow { screen: modelData; anchors.top: true; anchors.bottom: true; anchors.left: true; implicitWidth: borderSize; color: theme.colors.bg
+                PanelWindow { id: gapLeft; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.left: true; implicitWidth: borderSize; color: theme.colors.bg
                     Rectangle { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
                 }
-                PanelWindow { screen: modelData; anchors.top: true; anchors.bottom: true; anchors.right: true; implicitWidth: borderSize; color: theme.colors.bg
+                PanelWindow { id: gapRight; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.right: true; implicitWidth: borderSize; color: theme.colors.bg
                     Rectangle { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
                 }
-                PanelWindow { screen: modelData; anchors.top: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
+                PanelWindow { id: gapTop; screen: modelData; anchors.top: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
                     Rectangle { anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: parent.width; implicitHeight: strokeWidth; color: theme.colors.stroke }
                 
                     StuffTop {}
                 }
-                PanelWindow { screen: modelData; anchors.bottom: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
+                PanelWindow { id: gapBottom; screen: modelData; anchors.bottom: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
                     Rectangle { anchors.top: parent.top; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: parent.width; implicitHeight: strokeWidth; color: theme.colors.stroke }
                 
                     StuffBottom {}
                 }
 
                 PanelWindow {
+                    id: panel
                     screen: modelData
+
+                    property bool menuShowing: false
 
                     anchors.top: true
                     anchors.bottom: true
@@ -65,6 +69,8 @@ Scope {
 
                         color: theme.colors.bg
 
+                        Hypr { anchors.centerIn: parent }
+
                         WrapperItem {
                             anchors.fill: parent
                             margin: padding
@@ -79,7 +85,7 @@ Scope {
                                     spacing: padding
                                     
                                     Item {}
-                                    Menu { Layout.alignment: Qt.AlignHCenter }
+                                    MenuButton { Layout.alignment: Qt.AlignHCenter }
                                     Item {}
                                     Time {}
                                     Notifs {}
@@ -88,11 +94,10 @@ Scope {
 
                                 ColumnLayout {
                                     //Layout.alignment: Qt.AlignCenter
-                                    anchors.centerIn: parent
                                     implicitWidth: parent.width
                                     spacing: padding
 
-                                    Hypr {}
+                                    
                                 }
 
                                 ColumnLayout {
@@ -105,14 +110,21 @@ Scope {
                                     //Bluetooth {}
                                     Separator { text: ""; color: theme.colors.dark2; Layout.alignment: Qt.AlignHCenter }
                                     SystemTray {}
-                                    Separator { text: ""; color: theme.colors.dark2; Layout.alignment: Qt.AlignHCenter }
-                                    Power {}
+                                    //Separator { text: ""; color: theme.colors.dark2; Layout.alignment: Qt.AlignHCenter }
+                                    //Power {}
                                     Item {}
                                 }
                             }
                         }
                     }
-                }
+
+                    Menu { id: menu }
+
+                    function toggleMenu(toggle) {
+                        menu.visible = toggle
+                        
+                    }
+                }      
             }
         }
     }

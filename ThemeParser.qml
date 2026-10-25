@@ -9,7 +9,7 @@ Singleton {
 
     FileView {
         id: themeJson
-        path: Quickshell.shellPath("../myTheme.json")
+        path: Quickshell.shellPath("./theme/theme.json")
 
         watchChanges: true
         blockLoading: true

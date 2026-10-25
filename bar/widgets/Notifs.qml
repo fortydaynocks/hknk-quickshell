@@ -21,4 +21,32 @@ Rectangle {
         
         text: ""
     }
+
+    Process {
+        id: notifProcess
+        command: ["bash", "-c", "swaync-client -t -sw"]
+    }
+
+    MouseArea {
+        id: volumeScroll
+        anchors.fill: parent
+
+        hoverEnabled: true
+
+        onClicked: function(mouse) {
+            if (mouse.button == Qt.LeftButton) {
+                notifProcess.running = true
+            }
+        }
+
+        onEntered: {
+            root.opacity = 0.5
+
+        }
+
+        onExited: {
+            root.opacity = 1
+
+        }
+    }
 }

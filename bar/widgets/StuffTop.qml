@@ -11,7 +11,7 @@ RowLayout {
     anchors.centerIn: parent
 
     property var topLevel: Hyprland.activeToplevel
-    property var topLevelName: Hyprland.activeToplevel.wayland.appId || ""
+    property var topLevelName: topLevel && topLevel.wayland && topLevel.wayland.appId || ""
 
     Separator { id: sepLeft; text: "["; color: theme.colors.dark3 }
 
