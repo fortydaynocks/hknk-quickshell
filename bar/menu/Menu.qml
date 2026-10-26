@@ -21,8 +21,8 @@ PopupWindow {
     implicitWidth: 400
     implicitHeight: panel.height ? panel.height - (padding * 2) : 600
 
-    visible: !panel.menuShowing
-    //grabFocus: true
+    visible: panel.menuShowing
+    grabFocus: true
     //mask: Region { item: menuContainer }
     //mask: Region {}
 
