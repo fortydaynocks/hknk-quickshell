@@ -12,6 +12,7 @@ PopupWindow {
     id: menuRoot
 
     property string iAm: ""
+    property bool safetyLock: false
 
     anchor.window: panel
     anchor.rect.x: barSize + padding
@@ -20,8 +21,8 @@ PopupWindow {
     implicitWidth: 400
     implicitHeight: panel.height ? panel.height - (padding * 2) : 600
 
-    visible: panel.menuShowing
-    grabFocus: true
+    visible: !panel.menuShowing
+    //grabFocus: true
     //mask: Region { item: menuContainer }
     //mask: Region {}
 
@@ -108,21 +109,41 @@ PopupWindow {
                         Layout.fillWidth: true
                         spacing: padding * 2
 
-                        MenuItem { long: 1; tall: 20; bg_color: theme.colors.dark1; outlineWidth: strokeWidth; outlineColor: theme.colors.dark2
-                            
+                        MenuItem { long: 1; tall: 20; bg_color: "transparent"
+                            PowerOption {
+                                title: "󰐥 POWER"
+                                process: "systemctl poweroff"
+
+                            }
                         }
 
                         MenuItem { long: 1; tall: 20; bg_color: theme.colors.dark1; outlineWidth: strokeWidth; outlineColor: theme.colors.dark2
+                            PowerOption {
+                                title: " RESTART"
+                                process: "systemctl reboot"
 
+                            }
                         }
 
                         MenuItem { long: 1; tall: 20; bg_color: theme.colors.dark1; outlineWidth: strokeWidth; outlineColor: theme.colors.dark2
+                            PowerOption {
+                                title: "󰤄 SLEEP"
+                                process: "systemctl sleep"
 
+                            }
                         }
 
                         MenuItem { long: 1; tall: 20; bg_color: theme.colors.dark1; outlineWidth: strokeWidth; outlineColor: theme.colors.dark2
+                            PowerOption {
+                                title: " WIP"
+                                
 
+                            }
                         }
+                    }
+
+                    MenuItem { long: 1; tall: 20; bg_color: "transparent"
+                        SafetyLock {}
                     }
                 }
             }
