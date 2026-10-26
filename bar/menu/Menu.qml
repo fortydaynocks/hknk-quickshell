@@ -300,7 +300,7 @@ PopupWindow {
         PropertyAction { target: menuFill; property: "opacity"; value: 1 }
         NumberAnimation { target: blueOverlay; property: "implicitWidth"; to: 0; duration: 200; easing.type: Easing.OutCirc }
 
-        //ParallelAnimation { 
+        //#ParallelAnimation { 
         //}
 
         //ParallelAnimation {

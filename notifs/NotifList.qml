@@ -78,7 +78,7 @@ PopupWindow {
                             font: bigFont
                             color: modelData.urgency == NotificationUrgency.Critical ? theme.colors.critical : theme.colors.accent
 
-                            text: modelData.summary
+                            text: ":: " + modelData.summary.toUpperCase()
                         }
 
                         Text {
@@ -122,8 +122,8 @@ PopupWindow {
                     running: true
 
                     PropertyAction { target: notifPanel; property: "implicitWidth"; value: 0 }
-                    NumberAnimation { target: notifPanel; property: "implicitWidth"; to: layout.width; duration: 300; easing.type: Easing.OutCirc }
-                    NumberAnimation { target: blueOverlay; property: "implicitWidth"; to: 0; duration: 300; easing.type: Easing.OutCirc }                
+                    NumberAnimation { target: notifPanel; property: "implicitWidth"; to: layout.width; duration: 200; easing.type: Easing.OutCirc }
+                    NumberAnimation { target: blueOverlay; property: "implicitWidth"; to: 0; duration: 200; easing.type: Easing.OutCirc }                
                 }
             }
         }

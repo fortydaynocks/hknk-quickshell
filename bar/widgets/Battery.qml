@@ -13,10 +13,12 @@ RowLayout {
     property string batteryBar: ""
     property string batteryBarUnit: "󰝤"
 
+    property var usedColor: batteryPercentage <= 0.2 ? theme.colors.critical : (batteryPercentage <= 0.2 ? theme.colors.critical : theme.colors.accent)
+
     spacing: padding
     Text {
         font: normalFont
-        color: theme.colors.accent
+        color: usedColor
         
         text: Math.round(batteryPercentage * 100) + "% ["
     }
@@ -32,7 +34,7 @@ RowLayout {
                 property real opacityMath: (batteryPercentage - assignedPercentage) * 10
 
                 font: normalFont
-                color: theme.colors.accent
+                color: usedColor
                 
                 text: assignedPercentage <= Math.ceil(batteryPercentage) ? batteryBarUnit : " "
                 opacity: opacityMath
@@ -43,14 +45,14 @@ RowLayout {
 
     Text {
         font: normalFont
-        color: theme.colors.accent
+        color: usedColor
         
         text: "]"
     }
 
     Text {
         font: normalFont
-        color: battery.state == UPowerDeviceState.Charging ? theme.colors.accent2 : theme.colors.dark2
+        color: battery.state == UPowerDeviceState.Charging ? theme.colors.accent2 : usedColor
 
         text: battery.state == UPowerDeviceState.Charging ? "󱐋 CHARGING" : "BTRY"
     }

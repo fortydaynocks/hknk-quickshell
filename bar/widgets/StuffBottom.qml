@@ -13,7 +13,7 @@ RowLayout {
     property int volumeValue: Math.round(Pipewire.defaultAudioSink.audio.volume * 100)
     property bool volumeMuted: Pipewire.defaultAudioSink.audio.muted
 
-    property string netValue: ""
+    property string netValue: "<no network>"
     property string ramValue: ""
     property string diskValue: ""
 
@@ -78,11 +78,17 @@ RowLayout {
     Process {
         id: netProcess
 
-        command: ["bash", "-c", "nmcli | awk 'NR==1 {print $4}'"]
+        command: ["bash", "-c", "nmcli device show | awk 'NR==6 {print $2}'"]
         running: true
 
         stdout: StdioCollector {
-            onStreamFinished: netValue = text.trim()
+            onStreamFinished: {
+                if (text == "lo") {
+                    netValue = "<no network>"
+                } else {
+                    netValue = text.trim()
+                }
+            }
         }
     }
 
