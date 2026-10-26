@@ -7,6 +7,7 @@ import Quickshell.Widgets
 import QtQuick.Controls
 
 import qs.bar.menu.widgets
+import qs.notifs
 
 PopupWindow {
     id: menuRoot
@@ -21,12 +22,18 @@ PopupWindow {
     implicitWidth: 400
     implicitHeight: panel.height ? panel.height - (padding * 2) : 600
 
-    visible: panel.menuShowing
-    grabFocus: true
-    //mask: Region { item: menuContainer }
-    //mask: Region {}
+    //  ENABLE FOR STANDARD USE
+    //visible: panel.menuShowing
+    //grabFocus: true
+
+    //  ENABLE FOR TESTING
+    visible: true
+    grabFocus: false
+    mask: Region {}
 
     color: "transparent"
+
+    NotifList {}
 
     Item {
         id: menuContainer

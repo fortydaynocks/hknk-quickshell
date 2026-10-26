@@ -1,6 +1,7 @@
 {
     "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-x6vkvd.png",
     "menuIcon": "",
+    "strokeWidth": 2,
 
     "colors": {
         "bg": "#dd000007",
@@ -16,7 +17,8 @@
 
         "white": "#ffffff",
         "black": "#000000",
-        "transparent": "#00000000"
+        "transparent": "#00000000",
+        "critical": "#ff0000"
     },
 
     "font": {

@@ -27,6 +27,10 @@ RowLayout {
 
     Separator { text: "|"; color: theme.colors.dark2 }
 
+    Battery {}
+
+    Separator { text: "|"; color: theme.colors.dark2 }
+
     Text {
         id: netLabel
         font: normalFont
@@ -55,6 +59,11 @@ RowLayout {
         textFormat: Text.RichText
         text: diskValue + " <font color=" + theme.colors.dark2 + ">DISK</font>"
     }
+
+
+
+
+
 
 
 

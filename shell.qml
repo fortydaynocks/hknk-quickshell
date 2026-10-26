@@ -7,6 +7,7 @@ import Quickshell.Io
 import QtQuick
 
 import Quickshell.Services.Mpris
+import Quickshell.Services.UPower
 
 import qs.bar
 import qs.desktop
@@ -30,6 +31,10 @@ Scope {
     property var mediaArt: media ? media.trackArtUrl : mediaArtPlaceholder
     property var mediaPlaying: media ? media.isPlaying : false
     
+    //  BATTERY
+    property var battery: UPower.displayDevice.isLaptopBattery ? UPower.displayDevice : null
+    property real batteryPercentage: battery ? battery.percentage : 0
+    property int maxBatteryPercentage: 100
     
     //  OBJECTS
     Bar {}
