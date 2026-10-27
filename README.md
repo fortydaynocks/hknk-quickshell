@@ -1,16 +1,23 @@
 <h3>HEKKENSHELL</h3>
 
-<img width="1240" height="96" alt="image" src="https://github.com/user-attachments/assets/3247f107-30dc-461f-8789-46d4e6eb546e" />
-<sub>(21 september 2026, 12:22 am)</sub>
+a COOL and AWESOME Quickshell shell for the COOL and AWESOME me.
+
+i only have around a month of Linux experience (at the point of writing).
+i may have done a lot of things wrong, SO I DON'T RECOMMEND USING THIS <b>YET</b>.
+
+
+requirements:
+- hyprland
+- wpaperd
 
 ---
+<img width="1919" height="1078" alt="image" src="https://github.com/user-attachments/assets/248482f2-03e0-434b-85e6-92a0fd37518d" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/0d1002cb-a643-4eef-86ef-356aed492aa3" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9afb76d9-00d0-415b-8eee-370ff266be60" />
+<img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/b94a45c0-9f17-42fc-aeb6-600e9a65fe66" />
 
-yeah, it's rather primitive so far... but i'm proud of it!
 
-at the time of writing, i have only been using EndeavourOS for 20 days...
-
-<img width="621" height="312" alt="image" src="https://github.com/user-attachments/assets/c7c2b701-4d34-412b-8bbe-31f208bf0e8b" />
-
-...so if you have any feedback, tips or suggestions, they are all welcome!
+---
+if you have feedback, tips or suggestions, they are all welcome!
 
 <sub>HKNK</sub>
