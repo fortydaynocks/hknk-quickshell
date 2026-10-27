@@ -1,20 +1,20 @@
 {
-    "name": "Punishing",
-    "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-6dqzgq.png",
+    "name": "Hunger",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-9mq9od.jpg",
     "menuIcon": "",
     "strokeWidth": 2,
 
     "colors": {
-        "bg": "#dd070000",
-        "stroke": "#554444",
+        "bg": "#dd000007",
+        "stroke": "#553322",
 
-        "dark1": "#221111",
-        "dark2": "#443333",
-        "dark3": "#665555",
+        "dark1": "#111122",
+        "dark2": "#333344",
+        "dark3": "#555566",
 
-        "accent": "#ff3333",
-        "accent2": "#ffdddd",
-        "accentdark": "#773333",
+        "accent": "#ffbb77",
+        "accent2": "#ffffdd",
+        "accentdark": "#334477",
 
         "white": "#ffffff",
         "black": "#000000",

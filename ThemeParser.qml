@@ -7,9 +7,11 @@ import QtQuick
 Singleton {
     id: themeRoot
 
+    property string themePath: Quickshell.shellPath("./theme/theme.json")
+
     FileView {
         id: themeJson
-        path: Quickshell.shellPath("./theme/theme.json")
+        path: themePath
 
         watchChanges: true
         blockLoading: true
@@ -34,4 +36,7 @@ Singleton {
         bold: theme.font.bold,
         pointSize: theme.font.size + 4
     })
+    
+    //
+    function updatePath(path) { themeJson.path = path }
 }

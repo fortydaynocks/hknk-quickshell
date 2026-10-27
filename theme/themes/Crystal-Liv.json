@@ -1,20 +1,20 @@
 {
     "name": "Crystal-Liv",
-    "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-mlgeo1.jpg",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-mlgeo1.jpg",
     "menuIcon": "",
     "strokeWidth": 2,
 
     "colors": {
-        "bg": "#dd000007",
-        "stroke": "#444455",
+        "bg": "#dd221133",
+        "stroke": "#775577",
 
-        "dark1": "#111122",
-        "dark2": "#333344",
-        "dark3": "#555566",
+        "dark1": "#999999",
+        "dark2": "#777777",
+        "dark3": "#555555",
 
-        "accent": "#ffbbff",
-        "accent2": "#ddddff",
-        "accentdark": "#334477",
+        "accent": "#ff77ff",
+        "accent2": "#ff77ff",
+        "accentdark": "#773377",
 
         "white": "#ffffff",
         "black": "#000000",

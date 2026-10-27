@@ -18,7 +18,9 @@ Scope {
     id: shellRoot
 
     // PATHS
+    property var themePath: Quickshell.shellPath("theme/theme.json")
     property var themesPath: Qt.resolvedUrl("theme/themes")
+    property var dataPath: Quickshell.shellPath("data/myData.json")
 
     //  THEMING
     property var theme: ThemeParser.theme
@@ -85,5 +87,41 @@ Scope {
         }
 
         return newColors
+    }
+
+    //  DATA
+    FileView {
+        id: dataJson
+        path: dataPath
+
+        watchChanges: true
+        blockLoading: true
+
+        onFileChanged: reload()
+        onAdapterUpdated: writeAdapter()
+
+        adapter: JsonAdapter {
+            property string chosenTheme: ""
+            property int chosenThemeIndex: 0
+        }
+    }
+
+    //  THEME SWITCHING
+    function updateTheme(themeUrl, themeData) {
+        dataJson.adapter.chosenTheme = themeUrl
+        let cleanedUrl = themeUrl.replace("file://", "")
+
+        Quickshell.execDetached( { command: ["sh", "-c", "cp " + cleanedUrl + " " + themePath] } )  //  OVERWRITES THEME FILE 
+        ThemeParser.updatePath(cleanedUrl)  //  REREADS THEME FILE
+        Quickshell.execDetached( { command: ["sh", "-c", "wpaperctl set-wallpaper " + themeData.wallpaper] } )  //  UPDATES WPAPERD
+        Quickshell.execDetached( { command: ["sh", "-c", "hyprctl reload"] } )  //  UPDATES HYPRLAND
+        Quickshell.reload(false)
+        Quickshell.execDetached( { command: ["sh", "-c", "notify-send 'Theme Switched' 'Name: " + themeData.name + "'"] } )  //  NOTIFIES
+        //
+    }
+
+    Component.onCompleted: {
+        //let currentThemeJson = JSON.parse(dataJsonView.text())
+        //updateTheme(dataJsonView.path, currentThemeJson)
     }
 }

@@ -35,7 +35,7 @@ RowLayout {
         font: normalFont
         color: !(netValue == "no network...") ? theme.colors.accent2 : theme.colors.dark3
         textFormat: Text.RichText
-        text: netValue + " <font color=" + theme.colors.dark2 + ">NET</font>"
+        text: "******" + " <font color=" + theme.colors.dark2 + ">NET</font>" //
     }
 
     Separator { text: "|"; color: theme.colors.dark2 }

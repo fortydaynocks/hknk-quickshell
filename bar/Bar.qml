@@ -53,9 +53,11 @@ Scope {
                     anchors.bottom: true
                     anchors.left: true
 
+
                     implicitWidth: barSize
 
                     color: "transparent"
+                    focusable: true
                     
                     Rectangle {
                         anchors.verticalCenter: parent.verticalCenter

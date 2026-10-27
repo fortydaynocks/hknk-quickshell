@@ -34,6 +34,7 @@ PopupWindow {
         actionsSupported: true
         bodySupported: true
         imageSupported: false
+        keepOnReload: false
         onNotification: notif => {
             notif.tracked = true
 
@@ -67,7 +68,7 @@ PopupWindow {
 
                     border.width: strokeWidth
                     border.color: theme.colors.stroke
-
+                    
                     opacity: hovering && !dismissing ? 0.5 : 1
 
                     color: theme.colors.bg

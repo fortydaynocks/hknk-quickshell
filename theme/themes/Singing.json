@@ -1,20 +1,20 @@
 {
     "name": "Singing",
-    "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-6dvevl.png",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-6dvevl.png",
     "menuIcon": "",
     "strokeWidth": 2,
 
     "colors": {
-        "bg": "#dd000007",
-        "stroke": "#444455",
+        "bg": "#dd110700",
+        "stroke": "#775555",
 
-        "dark1": "#111122",
-        "dark2": "#333344",
-        "dark3": "#555566",
+        "dark1": "#332222",
+        "dark2": "#554444",
+        "dark3": "#776666",
 
-        "accent": "#3377ff",
-        "accent2": "#ffffff",
-        "accentdark": "#334477",
+        "accent": "#ff7777",
+        "accent2": "#ffbb77",
+        "accentdark": "#ff7777",
 
         "white": "#ffffff",
         "black": "#000000",

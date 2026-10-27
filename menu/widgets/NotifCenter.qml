@@ -18,6 +18,7 @@ Item {
         actionsSupported: true
         bodySupported: true
         imageSupported: false
+        keepOnReload: false
         onNotification: notif => {
             notif.tracked = true
 

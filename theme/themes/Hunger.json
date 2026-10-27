@@ -1,12 +1,12 @@
 {
     "name": "Hunger",
-    "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-9mq9od.jpg",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-9mq9od.jpg",
     "menuIcon": "",
     "strokeWidth": 2,
 
     "colors": {
         "bg": "#dd000007",
-        "stroke": "#444455",
+        "stroke": "#553322",
 
         "dark1": "#111122",
         "dark2": "#333344",

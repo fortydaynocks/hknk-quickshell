@@ -52,8 +52,8 @@ RowLayout {
 
     Text {
         font: normalFont
-        color: battery.state == UPowerDeviceState.Charging ? theme.colors.accent2 : usedColor
+        color: battery && battery.state == UPowerDeviceState.Charging ? theme.colors.accent2 : usedColor
 
-        text: battery.state == UPowerDeviceState.Charging ? "󱐋 CHARGING" : "BTRY"
+        text: battery && battery.state == UPowerDeviceState.Charging ? "󱐋 CHARGING" : "BTRY"
     }
 }

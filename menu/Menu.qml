@@ -37,7 +37,7 @@ PopupWindow {
 
     //  POPUPS
     NotifList {}
-    ThemeSwitcher {}
+    ThemeSwitcher { id: themeSwitcher }
 
     //  MENUS
     Item {
@@ -110,6 +110,18 @@ PopupWindow {
 
                         MenuItem { long: 1; tall: 320; bg_color: theme.colors.bg; outlineWidth: strokeWidth; outlineColor: theme.colors.dark1
                             NotifCenter {}
+                        }
+
+                        Rectangle { Layout.fillWidth: true; implicitHeight: strokeWidth; color: theme.colors.stroke; opacity: 0.5 }
+
+                        MenuItem { long: 1; tall: 40; bg_color: theme.colors.dark1; outlineWidth: strokeWidth; outlineColor: theme.colors.stroke;
+                            label: "THEME SWITCHER"
+                            isButton: true
+
+                            buttonFunction: function(mouse) {
+                                menuRoot.visible = false
+                                themeSwitcher.visible = !themeSwitcher.visible
+                            }
                         }
                     }
                 }
@@ -293,6 +305,18 @@ PopupWindow {
             implicitHeight: parent.height;
 
             color: theme.colors.accent
+            clip: true
+
+            Text {
+                id: overlayText
+
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                font: bigFont
+                color: theme.colors.bg
+
+                text: "M E N U   󰍜 "
+            }
         }
     }
 
