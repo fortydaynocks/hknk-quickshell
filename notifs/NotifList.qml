@@ -1,5 +1,3 @@
-//@pragma Singleton
-
 import Quickshell
 import Quickshell.Io
 import QtQuick
@@ -69,6 +67,8 @@ PopupWindow {
 
                     border.width: strokeWidth
                     border.color: theme.colors.stroke
+
+                    opacity: hovering && !dismissing ? 0.5 : 1
 
                     color: theme.colors.bg
                     clip: true
@@ -173,12 +173,10 @@ PopupWindow {
                         }
 
                         onEntered: {
-                            notifPanel.opacity = 0.5
                             notifPanel.hovering = true; stopTimer()
                         }
 
                         onExited: {
-                            notifPanel.opacity = 1
                             notifPanel.hovering = false; startTimer()
                         }
                     }
@@ -233,10 +231,6 @@ PopupWindow {
                         PauseAnimation { duration: 200 }
                         NumberAnimation { target: notifPanel; property: "implicitWidth"; to: 0; duration: 200; easing.type: Easing.OutCirc }
                         ScriptAction { script: modelData.dismiss() }
-                    }
-
-                    Behavior on Layout.preferredHeight {
-                        NumberAnimation { duration: 200; easing.type: Easing.OutCirc }
                     }
                 }
             }

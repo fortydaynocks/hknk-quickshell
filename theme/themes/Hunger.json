@@ -1,0 +1,35 @@
+{
+    "name": "Hunger",
+    "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-9mq9od.jpg",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd000007",
+        "stroke": "#444455",
+
+        "dark1": "#111122",
+        "dark2": "#333344",
+        "dark3": "#555566",
+
+        "accent": "#ffbb77",
+        "accent2": "#ffffdd",
+        "accentdark": "#334477",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

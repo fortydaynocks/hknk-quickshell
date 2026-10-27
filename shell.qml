@@ -17,6 +17,9 @@ import qs.desktop
 Scope {
     id: shellRoot
 
+    // PATHS
+    property var themesPath: Qt.resolvedUrl("theme/themes")
+
     //  THEMING
     property var theme: ThemeParser.theme
     

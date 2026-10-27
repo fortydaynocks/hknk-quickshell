@@ -1,23 +1,25 @@
 {
+    "name": "Selena",
     "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-x6vkvd.png",
     "menuIcon": "",
     "strokeWidth": 2,
 
     "colors": {
-        "bg": "#bb000007",
-        "stroke": "#444466",
+        "bg": "#dd000007",
+        "stroke": "#444455",
 
-        "dark1": "#333355",
-        "dark2": "#444466",
-        "dark3": "#555577",
+        "dark1": "#111122",
+        "dark2": "#333344",
+        "dark3": "#555566",
 
         "accent": "#3377ff",
-        "accent2": "#ffffff",
+        "accent2": "#ddddff",
         "accentdark": "#334477",
 
         "white": "#ffffff",
         "black": "#000000",
-        "transparent": "#00000000"
+        "transparent": "#00000000",
+        "critical": "#ff0000"
     },
 
     "font": {

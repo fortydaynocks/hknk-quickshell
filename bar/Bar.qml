@@ -8,7 +8,7 @@ import QtQuick.Shapes
 import Quickshell.Widgets
 
 import qs.bar.widgets
-import qs.bar.menu
+import qs.menu
 
 Scope {
     id: root

@@ -13,7 +13,7 @@ RowLayout {
     property int volumeValue: Math.round(Pipewire.defaultAudioSink.audio.volume * 100)
     property bool volumeMuted: Pipewire.defaultAudioSink.audio.muted
 
-    property string netValue: "<no network>"
+    property string netValue: "no network..."
     property string ramValue: ""
     property string diskValue: ""
 
@@ -33,7 +33,7 @@ RowLayout {
     Text {
         id: netLabel
         font: normalFont
-        color: theme.colors.accent
+        color: !(netValue == "no network...") ? theme.colors.accent2 : theme.colors.dark3
         textFormat: Text.RichText
         text: netValue + " <font color=" + theme.colors.dark2 + ">NET</font>"
     }
@@ -82,8 +82,8 @@ RowLayout {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                if (text == "lo") {
-                    netValue = "<no network>"
+                if (text.trim() == "lo") {
+                    netValue = "no network..."
                 } else {
                     netValue = text.trim()
                 }
@@ -119,6 +119,7 @@ RowLayout {
         repeat: true
 
         onTriggered: {
+            netProcess.running = true
             ramProcess.running = true
             diskProcess.running = true
         }

@@ -1,0 +1,35 @@
+{
+    "name": "Punishing",
+    "wallpaper": "/home/hekkenok/Pictures/Wallpapers/wallhaven-6dqzgq.png",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd070000",
+        "stroke": "#554444",
+
+        "dark1": "#221111",
+        "dark2": "#443333",
+        "dark3": "#665555",
+
+        "accent": "#ff3333",
+        "accent2": "#ffdddd",
+        "accentdark": "#773333",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

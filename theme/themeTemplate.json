@@ -1,0 +1,35 @@
+{
+    "name": "<template-name>",
+    "wallpaper": "<path-to-wallpaper>",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd000000",
+        "stroke": "#444444",
+
+        "dark1": "#111111",
+        "dark2": "#333333",
+        "dark3": "#555555",
+
+        "accent": "#7777ff",
+        "accent2": "#ffffff",
+        "accentdark": "#333377",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

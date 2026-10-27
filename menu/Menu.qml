@@ -6,8 +6,9 @@ import QtQuick.Layouts
 import Quickshell.Widgets
 import QtQuick.Controls
 
-import qs.bar.menu.widgets
+import qs.menu.widgets
 import qs.notifs
+import qs.menu.popups
 
 PopupWindow {
     id: menuRoot
@@ -34,8 +35,11 @@ PopupWindow {
 
     color: "transparent"
 
+    //  POPUPS
     NotifList {}
+    ThemeSwitcher {}
 
+    //  MENUS
     Item {
         id: menuContainer
         implicitWidth: parent.width
@@ -299,7 +303,7 @@ PopupWindow {
         PropertyAction { target: menuFill; property: "opacity"; value: 0 }
         PropertyAction { target: blueOverlay; property: "implicitWidth"; value: menuRoot.width }
         
-        NumberAnimation { target: menuContainer; property: "implicitWidth"; to: menuRoot.width; duration: 200; easing.type: Easing.InOutCirc }
+        NumberAnimation { target: menuContainer; property: "implicitWidth"; to: menuRoot.width; duration: 200; easing.type: Easing.OutCirc }
         PropertyAction { target: menuFill; property: "opacity"; value: 1 }
         NumberAnimation { target: blueOverlay; property: "implicitWidth"; to: 0; duration: 200; easing.type: Easing.OutCirc }
 
