@@ -5,6 +5,7 @@ a COOL and AWESOME Quickshell shell for the COOL and AWESOME me.
 i only have around a month of Linux experience (at the point of writing).
 i may have done a lot of things wrong, SO I DON'T RECOMMEND USING THIS <b>YET</b>.
 
+---
 DONE! :: menu // notifications // theme switcher
 
 TO DO :: app launcher // more widgets // more EVERYTHING!
