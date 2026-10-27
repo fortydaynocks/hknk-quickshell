@@ -23,13 +23,14 @@ PopupWindow {
     implicitHeight: panel.height ? panel.height - (padding * 2) : 600
 
     //  ENABLE FOR STANDARD USE
-    //visible: panel.menuShowing
-    //grabFocus: true
+    visible: panel.menuShowing
+    grabFocus: true
+
 
     //  ENABLE FOR TESTING
-    visible: true
-    grabFocus: false
-    mask: Region {}
+    //visible: true
+    //grabFocus: false 
+    //mask: Region {}
 
     color: "transparent"
 
@@ -99,12 +100,14 @@ PopupWindow {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    //Rectangle {
-                        //implicitWidth: parent.width
-                        //implicitHeight: 2000
-                        
-                        //opacity: 0.1
-                    //}
+                    ColumnLayout {
+                        Layout.alignment: Qt.AlignTop
+                        implicitWidth: menuFill.width
+
+                        MenuItem { long: 1; tall: 320; bg_color: theme.colors.bg; outlineWidth: strokeWidth; outlineColor: theme.colors.dark1
+                            NotifCenter {}
+                        }
+                    }
                 }
 
                 ColumnLayout {

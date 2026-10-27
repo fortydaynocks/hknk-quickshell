@@ -20,7 +20,7 @@ Scope {
     property int strokeWidth: 2
 
     Variants {
-        model: Quickshell.screens;
+        model: Quickshell.screens
 
         delegate: Component {
             Scope {

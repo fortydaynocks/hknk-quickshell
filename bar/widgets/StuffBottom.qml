@@ -27,9 +27,8 @@ RowLayout {
 
     Separator { text: "|"; color: theme.colors.dark2 }
 
-    Battery {}
-
-    Separator { text: "|"; color: theme.colors.dark2 }
+    Battery { visible: shellRoot.battery }
+    Separator { visible: shellRoot.battery; text: "|"; color: theme.colors.dark2 }
 
     Text {
         id: netLabel

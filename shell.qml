@@ -8,9 +8,11 @@ import QtQuick
 
 import Quickshell.Services.Mpris
 import Quickshell.Services.UPower
+import Quickshell.Hyprland
 
 import qs.bar
 import qs.desktop
+
 
 Scope {
     id: shellRoot
@@ -35,6 +37,10 @@ Scope {
     property var battery: UPower.displayDevice.isLaptopBattery ? UPower.displayDevice : null
     property real batteryPercentage: battery ? battery.percentage : 0
     property int maxBatteryPercentage: 100
+
+    //  HYPRLAND
+    property var hyprMonitors: Hyprland.monitors
+    property var hyprThisMonitor: Hyprland.focusedMonitor
     
     //  OBJECTS
     Bar {}
