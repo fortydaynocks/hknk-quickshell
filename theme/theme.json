@@ -1,20 +1,20 @@
 {
-    "name": "Hunger",
-    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-9mq9od.jpg",
+    "name": "Endfield",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-po7drp.png",
     "menuIcon": "",
     "strokeWidth": 2,
 
     "colors": {
-        "bg": "#dd000007",
-        "stroke": "#553322",
+        "bg": "#000000",
+        "stroke": "#333333",
 
-        "dark1": "#111122",
-        "dark2": "#333344",
-        "dark3": "#555566",
+        "dark1": "#111111",
+        "dark2": "#333333",
+        "dark3": "#555555",
 
-        "accent": "#ffbb77",
-        "accent2": "#ffffdd",
-        "accentdark": "#334477",
+        "accent": "#999999",
+        "accent2": "#ffffff",
+        "accentdark": "#777777",
 
         "white": "#ffffff",
         "black": "#000000",

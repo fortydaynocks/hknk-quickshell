@@ -1,0 +1,35 @@
+{
+    "name": "F40 C",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-xll5z3.jpg",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#ffffff",
+        "stroke": "#330000",
+
+        "dark1": "#bbbbbb",
+        "dark2": "#999999",
+        "dark3": "#777777",
+
+        "accent": "#ff0000",
+        "accent2": "#773333",
+        "accentdark": "#773333",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

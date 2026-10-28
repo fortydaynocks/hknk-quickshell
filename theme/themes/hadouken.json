@@ -1,0 +1,35 @@
+{
+    "name": "Hadouken",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-nzxxey.jpg",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#000000",
+        "stroke": "#333333",
+
+        "dark1": "#111111",
+        "dark2": "#333333",
+        "dark3": "#555555",
+
+        "accent": "#ffffff",
+        "accent2": "#ffbbbb",
+        "accentdark": "#010000",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

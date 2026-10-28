@@ -168,6 +168,9 @@ PopupWindow {
                         hoverEnabled: true
 
                         onClicked: function(mouse) { if (mouse.button == Qt.LeftButton && !notifPanel.dismissing) {
+                            if (modelData.actions.length > 0) {
+                                modelData.actions[0].invoke()
+                            } 
                             notifPanel.dismissing = true
                             dismiss()
                             }
@@ -204,7 +207,7 @@ PopupWindow {
                         id: notifTimer
 
                         interval: root.notifTimeout * 1000
-                        onTriggered: { notifPanel.visible = false }
+                        onTriggered: { modelData.expire() }
                     }
 
                     SequentialAnimation {

@@ -17,6 +17,8 @@ RowLayout {
     property string ramValue: ""
     property string diskValue: ""
 
+    property bool censorWifiName: false
+
     Text {
         font: normalFont
         color: theme.colors.accent2
@@ -35,7 +37,7 @@ RowLayout {
         font: normalFont
         color: !(netValue == "no network...") ? theme.colors.accent2 : theme.colors.dark3
         textFormat: Text.RichText
-        text: "******" + " <font color=" + theme.colors.dark2 + ">NET</font>" //
+        text: (censorWifiName ? "*****" : netValue) + " <font color=" + theme.colors.dark2 + ">NET</font>" //
     }
 
     Separator { text: "|"; color: theme.colors.dark2 }

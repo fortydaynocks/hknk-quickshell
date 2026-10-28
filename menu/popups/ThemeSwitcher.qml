@@ -27,7 +27,7 @@ PopupWindow {
     color: "transparent"
 
     visible: visible && imOnTheActiveScreen
-    //grabFocus: true
+    grabFocus: true
     //mask: Region {}
 
     
@@ -134,7 +134,7 @@ PopupWindow {
                                 Layout.fillWidth: true
 
                                 font: normalFont
-                                color: themeData.colors.accent2
+                                color: theme.colors.accent2
                                 elide: Text.ElideRight
 
                                 text: themeData.name.toUpperCase()
@@ -178,7 +178,7 @@ PopupWindow {
                                     implicitHeight: parent.cubeHeight
                                     rotation: 45
 
-                                    border.width: strokeWidth
+                                    border.width: 1
                                     border.color: themeData.colors.stroke
 
                                     color: themeData.colors.bg
@@ -189,6 +189,9 @@ PopupWindow {
                                     implicitHeight: parent.cubeHeight
                                     rotation: 45
 
+                                    border.width: 1
+                                    border.color: themeData.colors.bg
+
                                     color: themeData.colors.accent
                                 }
 
@@ -197,10 +200,14 @@ PopupWindow {
                                     implicitHeight: parent.cubeHeight
                                     rotation: 45
 
+                                    border.width: 1
+                                    border.color: themeData.colors.accent
+
                                     color: themeData.colors.accent2
                                 }
 
                                 Rectangle {
+                                    
                                     implicitWidth: parent.cubeWidth
                                     implicitHeight: parent.cubeHeight
                                     rotation: 45
@@ -279,5 +286,6 @@ PopupWindow {
 
         Keys.onReturnPressed: { updateTheme(listView.currentItem) }
         Keys.onEnterPressed: { updateTheme(listView.currentItem) }
+        Keys.onEscapePressed: { root.visible = false }
     }
 }

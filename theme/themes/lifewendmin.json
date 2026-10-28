@@ -1,0 +1,35 @@
+{
+    "name": "Life w/ Endmin",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-8gdkpy.jpg",
+     "menuIcon": "󰍜",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd110011",
+        "stroke": "#773333",
+
+        "dark1": "#553333",
+        "dark2": "#775555",
+        "dark3": "#997777",
+
+        "accent": "#bb7755",
+        "accent2": "#ffddff",
+        "accentdark": "#334477",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}
