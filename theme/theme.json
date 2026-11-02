@@ -1,20 +1,20 @@
 {
-    "name": "Endfield",
-    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-po7drp.png",
+    "name": "Selena",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-x6vkvd.png",
     "menuIcon": "",
     "strokeWidth": 2,
 
     "colors": {
-        "bg": "#000000",
-        "stroke": "#333333",
+        "bg": "#dd000007",
+        "stroke": "#444455",
 
-        "dark1": "#111111",
-        "dark2": "#333333",
-        "dark3": "#555555",
+        "dark1": "#111122",
+        "dark2": "#333344",
+        "dark3": "#555566",
 
-        "accent": "#999999",
-        "accent2": "#ffffff",
-        "accentdark": "#777777",
+        "accent": "#3377ff",
+        "accent2": "#ddddff",
+        "accentdark": "#334477",
 
         "white": "#ffffff",
         "black": "#000000",

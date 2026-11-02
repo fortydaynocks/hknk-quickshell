@@ -90,7 +90,7 @@ Scope {
                                     MenuButton { Layout.alignment: Qt.AlignHCenter }
                                     Item {}
                                     Time {}
-                                    Notifs {}
+                                    //Notifs {}
                                     Separator { text: ""; color: theme.colors.dark2; Layout.alignment: Qt.AlignHCenter }
                                 }
 

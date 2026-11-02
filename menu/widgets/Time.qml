@@ -32,7 +32,7 @@ Item {
 
             color: theme.colors.accent2
 
-            text: time
+            text: shellRoot.timeH + ":" + shellRoot.timeM
         }
 
         Rectangle { implicitHeight: parent.height * 0.5; implicitWidth: strokeWidth; color: theme.colors.accent }
@@ -46,43 +46,10 @@ Item {
 
             color: theme.colors.accent
 
-            text: date
+            text: shellRoot.date
         }
 
         Rectangle { implicitHeight: parent.height * 0.5; implicitWidth: strokeWidth; color: theme.colors.accent; opacity: 0.25 }
-
         
-    }
-
-    Process {
-        id: timeProcess
-
-        command: ["bash", "-c", "date '+%H:%M'"]
-        running: true
-
-        stdout: StdioCollector {
-            onStreamFinished: time = text.trim()
-        }
-    }
-
-    Process {
-        id: dateProcess
-
-        command: ["bash", "-c", "date '+%a %d %b'"]
-        running: true
-
-        stdout: StdioCollector {
-            onStreamFinished: date = text.trim()
-        }
-    }
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-
-        onTriggered: {
-            timeProcess.running = true
-        }
     }
 }

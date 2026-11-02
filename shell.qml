@@ -30,6 +30,11 @@ Scope {
     property var smallFont: ThemeParser.smallFont
     property var bigFont: ThemeParser.bigFont
 
+    //  TIME
+    property string timeH: ""
+    property string timeM: ""
+    property string date: ""
+
     //  MEDIA
     property var media: Mpris.players.values[Mpris.players.values.length - 1] || null
     property var mediaArtist: media ? media.trackArtist : "?"
@@ -49,7 +54,7 @@ Scope {
     
     //  OBJECTS
     Bar {}
-    //Desktop {}
+    Desktop {}
 
     //  CONNECTIONS
     Connections {
@@ -115,9 +120,55 @@ Scope {
         ThemeParser.updatePath(cleanedUrl)  //  REREADS THEME FILE
         Quickshell.execDetached( { command: ["sh", "-c", "wpaperctl set-wallpaper " + themeData.wallpaper] } )  //  UPDATES WPAPERD
         Quickshell.execDetached( { command: ["sh", "-c", "hyprctl reload"] } )  //  UPDATES HYPRLAND
-        Quickshell.reload(false)
+        Quickshell.reload(true)
         Quickshell.execDetached( { command: ["sh", "-c", "notify-send 'Theme Switched' 'Name: " + themeData.name + "'"] } )  //  NOTIFIES
         //
+    }
+
+    //  TIME
+    Process {
+        id: timeProcessH
+
+        command: ["bash", "-c", "date '+%H'"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: timeH = text.trim()
+        }
+    }
+
+    Process {
+        id: timeProcessM
+
+        command: ["bash", "-c", "date '+%M'"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: timeM = text.trim()
+        }
+    }
+
+    Process {
+        id: dateProcess
+
+        command: ["bash", "-c", "date '+%a %d %b'"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: date = text.trim()
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+
+        onTriggered: {
+            timeProcessH.running = true
+            timeProcessM.running = true
+            dateProcess.running = true
+        }
     }
 
     Component.onCompleted: {

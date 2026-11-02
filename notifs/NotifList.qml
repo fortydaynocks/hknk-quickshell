@@ -200,6 +200,7 @@ PopupWindow {
                     }
 
                     function dismiss() {
+                        if (!modelData.dismiss) { notifPanel.visible = false; return }
                         dismissNotif.start()
                     }
 
