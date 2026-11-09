@@ -18,7 +18,7 @@ Scope {
     id: shellRoot
 
     // PATHS
-    property var themePath: Quickshell.shellPath("theme/theme.json")
+    property var themePath: Quickshell.shellPath("data/theme.json")
     property var themesPath: Qt.resolvedUrl("theme/themes")
     property var dataPath: Quickshell.shellPath("data/myData.json")
 

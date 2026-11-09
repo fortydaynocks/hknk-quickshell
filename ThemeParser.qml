@@ -7,7 +7,7 @@ import QtQuick
 Singleton {
     id: themeRoot
 
-    property string themePath: Quickshell.shellPath("./theme/theme.json")
+    property string themePath: Quickshell.shellPath("./data/theme.json")
 
     FileView {
         id: themeJson
