@@ -150,7 +150,7 @@ Scope {
 
         Quickshell.execDetached( { command: ["sh", "-c", "cp " + cleanedUrl + " " + themePath] } )  //  OVERWRITES THEME FILE 
         ThemeParser.updatePath(cleanedUrl)  //  REREADS THEME FILE
-        Quickshell.execDetached( { command: ["sh", "-c", "wpaperctl set-wallpaper " + themeData.wallpaper] } )  //  UPDATES WPAPERD
+        Quickshell.execDetached( { command: ["sh", "-c", "wpaperd & wpaperctl set " + themeData.wallpaper] } )  //  UPDATES WPAPERD
         Quickshell.execDetached( { command: ["sh", "-c", "hyprctl reload"] } )  //  UPDATES HYPRLAND
         
         //  KITTY
@@ -222,8 +222,13 @@ Scope {
         }
     }
 
-    Component.onCompleted: {
-        //let currentThemeJson = JSON.parse(dataJsonView.text())
-        //updateTheme(dataJsonView.path, currentThemeJson)
+    //  FIRST START
+    IpcHandler {
+        target: "firstStart"
+
+        function start() {
+            updateTheme(dataJson.adapter.chosenTheme, ThemeParser.theme)
+            
+        }
     }
 }
