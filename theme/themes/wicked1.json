@@ -1,0 +1,35 @@
+{
+    "name": "Wicked I",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-ex2yvo.png",
+    "menuIcon": "#",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd110022",
+        "stroke": "#444466",
+
+        "dark1": "#222244",
+        "dark2": "#444466",
+        "dark3": "#666688",
+
+        "accent": "#3377ff",
+        "accent2": "#77ddff",
+        "accentdark": "#335577",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

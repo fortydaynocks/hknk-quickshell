@@ -1,0 +1,35 @@
+{
+    "name": "Oblivion",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-exrgkk.jpg",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd110000",
+        "stroke": "#443333",
+
+        "dark1": "#221111",
+        "dark2": "#443333",
+        "dark3": "#665555",
+
+        "accent": "#773333",
+        "accent2": "#ff7777",
+        "accentdark": "#331111",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

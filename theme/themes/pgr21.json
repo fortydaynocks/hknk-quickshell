@@ -1,0 +1,35 @@
+{
+    "name": "Wild Beast",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-x6d683.jpg",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd110011",
+        "stroke": "#554455",
+
+        "dark1": "#221122",
+        "dark2": "#443344",
+        "dark3": "#554455",
+
+        "accent": "#9977bb",
+        "accent2": "#ddbbff",
+        "accentdark": "#334477",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "name": "The Oni",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-76dw3y.jpg",
+    "menuIcon": "天",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd000000",
+        "stroke": "#444444",
+
+        "dark1": "#222222",
+        "dark2": "#444444",
+        "dark3": "#666666",
+
+        "accent": "#ff0000",
+        "accent2": "#ffffff",
+        "accentdark": "#773333",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}

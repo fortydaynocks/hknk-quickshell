@@ -1,0 +1,35 @@
+{
+    "name": "Dark Mountains",
+    "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/dark-wallpaper.jpg",
+    "menuIcon": "",
+    "strokeWidth": 2,
+
+    "colors": {
+        "bg": "#dd000011",
+        "stroke": "#444455",
+
+        "dark1": "#111122",
+        "dark2": "#333344",
+        "dark3": "#555566",
+
+        "accent": "#bbbbff",
+        "accent2": "#ffffff",
+        "accentdark": "#334477",
+
+        "white": "#ffffff",
+        "black": "#000000",
+        "transparent": "#00000000",
+        "critical": "#ff0000"
+    },
+
+    "font": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 10
+    },
+    "fontSmall": {
+        "family": "JetBrainsMono Nerd Font Propo",
+        "bold": true,
+        "size": 6
+    }
+}
