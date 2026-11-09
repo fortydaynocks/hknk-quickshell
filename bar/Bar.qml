@@ -37,14 +37,13 @@ Scope {
                     StuffBottom {}
                 }
                 PanelWindow { id: gapLeft; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.left: true; implicitWidth: borderSize; color: theme.colors.bg
-                    //exclusiveZone: borderSize + barSize
+                    exclusiveZone: barSize + borderSize
                     Rectangle { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height; color: theme.colors.stroke }
                     //Component.onCompleted: panel.visible = true //  HAS TO LOAD FIRST
                 }
                 PanelWindow { id: gapRight; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.right: true; implicitWidth: borderSize; color: theme.colors.bg
                     Rectangle { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height; color: theme.colors.stroke }
                 }
-                
 
                 PanelWindow {
                     id: panel
@@ -56,6 +55,8 @@ Scope {
                     anchors.bottom: true
                     anchors.left: true
 
+                    margins.left: -barSize
+                    exclusiveZone: 0
                     implicitWidth: barSize
 
                     color: "transparent"
