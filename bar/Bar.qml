@@ -28,6 +28,8 @@ Scope {
 
                 PanelWindow { id: gapLeft; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.left: true; implicitWidth: borderSize; color: theme.colors.bg
                     Rectangle { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
+                
+                    Component.onCompleted: panel.visible = true //  HAS TO LOAD FIRST
                 }
                 PanelWindow { id: gapRight; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.right: true; implicitWidth: borderSize; color: theme.colors.bg
                     Rectangle { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
@@ -58,6 +60,8 @@ Scope {
 
                     color: "transparent"
                     focusable: true
+
+                    visible: false
                     
                     Rectangle {
                         anchors.verticalCenter: parent.verticalCenter

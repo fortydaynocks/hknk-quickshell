@@ -112,6 +112,38 @@ Scope {
     }
 
     //  THEME SWITCHING
+    function trimmedColor(color) {
+       
+    }
+
+    function cmd(doThis) {
+        Quickshell.execDetached( { command: ["sh", "-c", doThis] } )
+    }
+
+    function configEdit(configPath, parameter,  denominator = "=", value, mode = "fuzzelColor") {
+        if (!configPath) { return }
+
+        let patchedValue = value
+
+        if (mode == "fuzzelColor") {
+            patchedValue = patchedValue.replace("#", "")
+            if (patchedValue.length == 8) {
+                patchedValue = patchedValue.slice(2, patchedValue.length) + patchedValue.slice(0, 2)
+            }
+            else {
+                patchedValue += "ff"
+            }
+        }
+
+        if (mode == "kittyColor") {
+            if (patchedValue.length >= 8) {
+                patchedValue = "#" + patchedValue.slice(3, patchedValue.length)
+            }
+        }
+
+        Quickshell.execDetached( { command: ["sh", "-c", "sed -i 's/" + parameter + denominator + ".*/" + parameter + denominator + patchedValue + "/' " + configPath] } )
+    }
+
     function updateTheme(themeUrl, themeData) {
         dataJson.adapter.chosenTheme = themeUrl
         let cleanedUrl = themeUrl.replace("file://", "")
@@ -120,9 +152,28 @@ Scope {
         ThemeParser.updatePath(cleanedUrl)  //  REREADS THEME FILE
         Quickshell.execDetached( { command: ["sh", "-c", "wpaperctl set-wallpaper " + themeData.wallpaper] } )  //  UPDATES WPAPERD
         Quickshell.execDetached( { command: ["sh", "-c", "hyprctl reload"] } )  //  UPDATES HYPRLAND
-        Quickshell.reload(true)
-        Quickshell.execDetached( { command: ["sh", "-c", "notify-send 'Theme Switched' 'Name: " + themeData.name + "'"] } )  //  NOTIFIES
-        //
+        
+        //  KITTY
+        configEdit("~/.config/kitty/kitty.conf", "background", " ", themeData.colors.bg, "kittyColor")
+        configEdit("~/.config/kitty/kitty.conf", "foreground", " ", themeData.colors.dark3, "kittyColor")
+
+        //  FUZZEL
+        configEdit("~/.config/fuzzel/fuzzel.ini", "background", "=", themeData.colors.bg, "fuzzelColor")
+        configEdit("~/.config/fuzzel/fuzzel.ini", "border", "=", themeData.colors.stroke, "fuzzelColor")
+        configEdit("~/.config/fuzzel/fuzzel.ini", "text", "=", themeData.colors.dark3, "fuzzelColor")
+        configEdit("~/.config/fuzzel/fuzzel.ini", "selection", "=", themeData.colors.accent, "fuzzelColor")
+        configEdit("~/.config/fuzzel/fuzzel.ini", "selection-text", "=", themeData.colors.bg, "fuzzelColor")
+        configEdit("~/.config/fuzzel/fuzzel.ini", "selection-match", "=", themeData.colors.stroke, "fuzzelColor")
+
+        //Quickshell.execDetached( { command: ["sh", "-c", "sed -i 's/background=.*/background=" + fuzzelColor(themeData.colors.bg) + "/' ~/.config/fuzzel/fuzzel.ini"] } )
+        //Quickshell.execDetached( { command: ["sh", "-c", "sed -i 's/border=.*/border=" + fuzzelColor(themeData.colors.stroke) + "/' ~/.config/fuzzel/fuzzel.ini"] } )
+        //Quickshell.execDetached( { command: ["sh", "-c", "sed -i 's/text=.*/text=" + fuzzelColor(themeData.colors.dark3) + "/' ~/.config/fuzzel/fuzzel.ini"] } )
+
+        //Quickshell.execDetached( { command: ["sh", "-c", "sed -i 's/selection=.*/selection=" + fuzzelColor(themeData.colors.dark3) + "/' ~/.config/fuzzel/fuzzel.ini"] } )
+
+        //cmd("kitten @ set-colors background=" + trimmedColor(themeData.colors.background))
+        //cmd("kitten @ set-colors foreground=" + trimmedColor(themeData.colors.dark3))
+        Quickshell.reload(false)
     }
 
     //  TIME

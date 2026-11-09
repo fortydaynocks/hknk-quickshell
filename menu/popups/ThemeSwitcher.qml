@@ -86,7 +86,7 @@ PopupWindow {
                     model: folderModel
                     clip: true
 
-                    currentIndex: dataJson.adapter.chosenThemeIndex || 0
+                    currentIndex: dataJson.adapter.chosenThemeIndex || 1
 
                     FolderListModel {
                         id: folderModel
