@@ -144,13 +144,19 @@ Scope {
         Quickshell.execDetached( { command: ["sh", "-c", "sed -i 's/" + parameter + denominator + ".*/" + parameter + denominator + patchedValue + "/' " + configPath] } )
     }
 
-    function updateTheme(themeUrl, themeData) {
+    function updateTheme(themeUrl, themeData, isFirstStart = false) {
+        if (isFirstStart) {
+            cmd("wpaperd")
+        
+        }
+
         dataJson.adapter.chosenTheme = themeUrl
         let cleanedUrl = themeUrl.replace("file://", "")
 
         Quickshell.execDetached( { command: ["sh", "-c", "cp " + cleanedUrl + " " + themePath] } )  //  OVERWRITES THEME FILE 
         ThemeParser.updatePath(cleanedUrl)  //  REREADS THEME FILE
-        Quickshell.execDetached( { command: ["sh", "-c", "wpaperd & wpaperctl set " + themeData.wallpaper] } )  //  UPDATES WPAPERD
+        
+        Quickshell.execDetached( { command: ["sh", "-c", "wpaperctl set " + themeData.wallpaper] } )  //  UPDATES WPAPERD
         Quickshell.execDetached( { command: ["sh", "-c", "hyprctl reload"] } )  //  UPDATES HYPRLAND
         
         //  KITTY
@@ -227,8 +233,8 @@ Scope {
         target: "firstStart"
 
         function start() {
-            updateTheme(dataJson.adapter.chosenTheme, ThemeParser.theme)
-            
+            updateTheme(dataJson.adapter.chosenTheme, ThemeParser.theme, true)
+
         }
     }
 }
