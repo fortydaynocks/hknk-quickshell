@@ -26,24 +26,25 @@ Scope {
             Scope {
                 required property var modelData
 
-                PanelWindow { id: gapLeft; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.left: true; implicitWidth: borderSize; color: theme.colors.bg
-                    Rectangle { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
-                
-                    Component.onCompleted: panel.visible = true //  HAS TO LOAD FIRST
-                }
-                PanelWindow { id: gapRight; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.right: true; implicitWidth: borderSize; color: theme.colors.bg
-                    Rectangle { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height - ((borderSize * 2) - (strokeWidth * 2)); color: theme.colors.stroke }
-                }
                 PanelWindow { id: gapTop; screen: modelData; anchors.top: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
-                    Rectangle { anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: parent.width; implicitHeight: strokeWidth; color: theme.colors.stroke }
+                    Rectangle { anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: (parent.width - (borderSize * 2)) + strokeWidth; implicitHeight: strokeWidth; color: theme.colors.stroke }
                 
                     StuffTop {}
                 }
                 PanelWindow { id: gapBottom; screen: modelData; anchors.bottom: true; anchors.left: true; anchors.right: true; implicitHeight: borderSize; color: theme.colors.bg
-                    Rectangle { anchors.top: parent.top; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: parent.width; implicitHeight: strokeWidth; color: theme.colors.stroke }
+                    Rectangle { anchors.top: parent.top; anchors.horizontalCenter: parent.horizontalCenter; implicitWidth: (parent.width - (borderSize * 2)) + strokeWidth; implicitHeight: strokeWidth; color: theme.colors.stroke }
                 
                     StuffBottom {}
                 }
+                PanelWindow { id: gapLeft; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.left: true; implicitWidth: borderSize; color: theme.colors.bg
+                    //exclusiveZone: borderSize + barSize
+                    Rectangle { anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height; color: theme.colors.stroke }
+                    //Component.onCompleted: panel.visible = true //  HAS TO LOAD FIRST
+                }
+                PanelWindow { id: gapRight; screen: modelData; anchors.top: true; anchors.bottom: true; anchors.right: true; implicitWidth: borderSize; color: theme.colors.bg
+                    Rectangle { anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter; implicitWidth: strokeWidth; implicitHeight: parent.height; color: theme.colors.stroke }
+                }
+                
 
                 PanelWindow {
                     id: panel
@@ -55,13 +56,12 @@ Scope {
                     anchors.bottom: true
                     anchors.left: true
 
-
                     implicitWidth: barSize
 
                     color: "transparent"
                     focusable: true
 
-                    visible: false
+                    //visible: false
                     
                     Rectangle {
                         anchors.verticalCenter: parent.verticalCenter

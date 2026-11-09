@@ -1,2 +1,3 @@
-.env
-/data/
+
+data/theme.json
+data/myData.json
