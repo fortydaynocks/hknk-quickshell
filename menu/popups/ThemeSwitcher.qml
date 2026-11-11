@@ -14,6 +14,7 @@ PopupWindow {
     id: root
 
     property var imOnTheActiveScreen: Hyprland.focusedMonitor.name == panel.screen.name
+    property var fileTypes: ["*.png", "*.jpg", "*.webp", "*.gif"]
     //property var windowOpen: false
 
     anchor.window: panel
@@ -55,9 +56,6 @@ PopupWindow {
                 anchors.fill: parent
                 spacing: padding * 2
 
-                //implicitWidth: parent.width - (padding * 8)
-                //implicitHeight: parent.height - (padding * 16)
-
                 Text {
 
                     color: theme.colors.accent
@@ -90,16 +88,15 @@ PopupWindow {
 
                     FolderListModel {
                         id: folderModel
-                        folder: shellRoot.themesPath
-                        nameFilters: ["*.json"]
+                        folder: shellRoot.wallpapers
+                        nameFilters: root.fileTypes
 
                     }
 
                     delegate: Item {
                         required property string fileName
                         required property string fileUrl
-                        readonly property var themeData: JSON.parse(newThemeJson.text())
-
+                        required property string filePath
 
                         property var selected: ListView.isCurrentItem
                         //font: normalFont
@@ -113,15 +110,15 @@ PopupWindow {
                         opacity: selected ? 1 : 0.25
                         Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutCirc } }
 
-                        FileView {
-                            id: newThemeJson
-                            path: fileUrl
+                        //FileView {
+                        //    id: newThemeJson
+                        //    path: fileUrl
 
-                            blockLoading: true
-                            watchChanges: true
+                        //    blockLoading: true
+                        //    watchChanges: true
 
-                            onFileChanged: this.reload()
-                        }
+                        //    onFileChanged: this.reload()
+                        //}
 
                         ColumnLayout {
                             anchors.fill: parent
@@ -129,98 +126,40 @@ PopupWindow {
 
                             Item {}
 
-                            Text {
-                                horizontalAlignment: Text.AlignHCenter
-                                Layout.fillWidth: true
+                            //Text {
+                            //    horizontalAlignment: Text.AlignHCenter
+                            //    Layout.fillWidth: true
 
-                                font: normalFont
-                                color: theme.colors.accent2
-                                elide: Text.ElideRight
+                            //    font: normalFont
+                            //    color: theme.colors.accent2
+                            //    elide: Text.ElideRight
 
-                                text: themeData.name.toUpperCase()
-                            }
+                            //    text: fileName.replace("-", " ").toUpperCase() //themeData.name.toUpperCase()
+                            //}
 
                             Rectangle {
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
 
-                                color: themeData.colors.bg
+                                color: theme.colors.bg
                                 clip: true
 
                                 Image {
                                     anchors.centerIn: parent
                                     
-                                    source: themeData.wallpaper
+                                    source: fileUrl
                                     sourceSize.height: parent.height
                                     fillMode: Image.PreserveAspectCrop
 
+                                    asynchronous: true
                                 }
 
                                 Rectangle {
                                     anchors.fill: parent
                                     
                                     border.width: strokeWidth
-                                    border.color: themeData.colors.accent2
+                                    border.color: theme.colors.accent2
                                     color: "transparent"
-                                }
-                            }
-
-                            RowLayout {
-                                property int cubeWidth: 8
-                                property int cubeHeight: 8
-
-                                Layout.alignment: Qt.AlignHCenter
-                                spacing: padding * 2
-                                Layout.fillWidth: true
-
-                                Rectangle {
-                                    implicitWidth: parent.cubeWidth
-                                    implicitHeight: parent.cubeHeight
-                                    rotation: 45
-
-                                    border.width: 1
-                                    border.color: themeData.colors.stroke
-
-                                    color: themeData.colors.bg
-                                }
-
-                                Rectangle {
-                                    implicitWidth: parent.cubeWidth
-                                    implicitHeight: parent.cubeHeight
-                                    rotation: 45
-
-                                    border.width: 1
-                                    border.color: themeData.colors.bg
-
-                                    color: themeData.colors.accent
-                                }
-
-                                Rectangle {
-                                    implicitWidth: parent.cubeWidth
-                                    implicitHeight: parent.cubeHeight
-                                    rotation: 45
-
-                                    border.width: 1
-                                    border.color: themeData.colors.accent
-
-                                    color: themeData.colors.accent2
-                                }
-
-                                Rectangle {
-                                    
-                                    implicitWidth: parent.cubeWidth
-                                    implicitHeight: parent.cubeHeight
-                                    rotation: 45
-
-                                    color: themeData.colors.dark2
-                                }
-
-                                Rectangle {
-                                    implicitWidth: parent.cubeWidth
-                                    implicitHeight: parent.cubeHeight
-                                    rotation: 45
-
-                                    color: themeData.colors.dark3
                                 }
                             }
 
@@ -268,12 +207,10 @@ PopupWindow {
         }
     }
 
-    function updateTheme(whichItem) {
-        let themeUrl = whichItem.fileUrl || shellRoot.themePath
-
+    function updateTheme(wallpaper) {
         dataJson.adapter.chosenThemeIndex = listView.currentIndex
-        shellRoot.updateTheme(themeUrl, whichItem.themeData)
-
+        
+        shellRoot.updateTheme(wallpaper)
         visible = false
     }
 
@@ -284,8 +221,8 @@ PopupWindow {
         Keys.onLeftPressed: listView.decrementCurrentIndex()
         Keys.onRightPressed: listView.incrementCurrentIndex()
 
-        Keys.onReturnPressed: { updateTheme(listView.currentItem) }
-        Keys.onEnterPressed: { updateTheme(listView.currentItem) }
+        Keys.onReturnPressed: { updateTheme(listView.currentItem.filePath) }
+        Keys.onEnterPressed: { updateTheme(listView.currentItem.filePath) }
         Keys.onEscapePressed: { root.visible = false }
     }
 }

@@ -1,0 +1,28 @@
+{
+  "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/punishing-1.png",
+  "alpha": "100",
+  "special": {
+    "background": "#190a0b",
+    "foreground": "#ffcaca",
+    "cursor": "#ffcaca",
+    "border": "#ffcaca"
+  },
+  "colors": {
+    "color0": "#190a0b",
+    "color1": "#512626",
+    "color2": "#513c42",
+    "color3": "#724545",
+    "color4": "#764c4d",
+    "color5": "#854a49",
+    "color6": "#a35254",
+    "color7": "#e89797",
+    "color8": "#692d2e",
+    "color9": "#652f2f",
+    "color10": "#654b52",
+    "color11": "#8e5656",
+    "color12": "#935f60",
+    "color13": "#a65c5b",
+    "color14": "#cb6669",
+    "color15": "#ffcaca"
+  }
+}

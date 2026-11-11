@@ -114,7 +114,7 @@ PopupWindow {
 
                         Rectangle { Layout.fillWidth: true; implicitHeight: strokeWidth; color: theme.colors.stroke; opacity: 0.5 }
 
-                        MenuItem { long: 1; tall: 40; bg_color: theme.colors.dark1; outlineWidth: strokeWidth; outlineColor: theme.colors.stroke;
+                        MenuItem { long: 1; tall: 40; outlineWidth: strokeWidth;
                             label: "THEME SWITCHER"
                             isButton: true
 

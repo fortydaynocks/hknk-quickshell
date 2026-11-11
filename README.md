@@ -17,9 +17,14 @@ TO DO :: app launcher // more widgets // more EVERYTHING!
 <img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/b94a45c0-9f17-42fc-aeb6-600e9a65fe66" />
 
 ---
-requirements:
-- hyprland
-- wpaperd
+hard requirements:
+- [window manager] hyprland
+- [wallpaper] awww
+- [colors] hellwal
+- [run / dmenu] fuzzel
+
+soft requirements:
+- your hyprland needs a way to use the theme.json file. decode it and use its properties
 
 if you have feedback, tips or suggestions, they are all welcome!
 

@@ -26,7 +26,7 @@ Item {
         implicitHeight: parent.height * 0.75
         implicitWidth: 40
 
-        color: menuRoot.safetyLock ? theme.colors.accent : theme.colors.dark2
+        color: menuRoot.safetyLock ? theme.colors.accent : theme.colors.dark1
 
         Item {
             anchors.fill: parent

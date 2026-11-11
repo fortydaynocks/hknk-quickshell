@@ -5,10 +5,12 @@ import QtQuick
 Rectangle {
     id: root
 
+    property bool hovering: false
+
     implicitWidth: parent.width - (padding * 2)
     implicitHeight: parent.width - (padding * 2)
 
-    color: theme.colors.accent
+    color: root.hovering ? theme.colors.dark3 : theme.colors.bg
     
     Text {
         id: label
@@ -18,7 +20,7 @@ Rectangle {
         font.bold: theme.font.bold
         font.pixelSize: barSize * 0.45
 
-        color: theme.colors.accent2
+        color: root.hovering ? theme.colors.accent2 : theme.colors.dark3
 
         text: theme.menuIcon || "?"
     }
@@ -32,19 +34,17 @@ Rectangle {
         onClicked: function(mouse) {
             if (mouse.button == Qt.LeftButton) {
                 panel.toggleMenu(!panel.menuShowing)
-                //Pipewire.defaultAudioSink.audio.muted = !Pipewire.defaultAudioSink.audio.muted
+
             }
         }
 
         onEntered: {
-            root.color = theme.colors.accent2
-            label.color = theme.colors.accent
+            root.hovering = true
 
         }
 
         onExited: {
-            root.color = theme.colors.accent
-            label.color = theme.colors.accent2
+            root.hovering = false
 
         }
     }

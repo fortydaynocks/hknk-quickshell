@@ -7,17 +7,19 @@ import QtQuick.Layouts
 Rectangle {
     id: root
 
+    property bool hovering: false
+
     property var label: ""
     property var isButton: false
 
     property int long: 0
     property int tall: 0
-    property var bg_color: theme.colors.dark1
+    property var bg_color: theme.colors.bg
     property var bg_opacity: 1
 
     property var outlineWidth: 0
     property var outlineOpacity: 1
-    property var outlineColor: "#000000"
+    property var outlineColor: theme.colors.stroke
     
     property var buttonFunction: function(mouse) {}
 
@@ -32,7 +34,7 @@ Rectangle {
         id: bg
         anchors.fill: parent
 
-        color: root.bg_color
+        color: root.hovering ? theme.colors.accent : root.bg_color
         opacity: root.bg_opacity
     }
 
@@ -41,7 +43,7 @@ Rectangle {
         anchors.fill: parent
 
         border.width: outlineWidth
-        border.color: outlineColor
+        border.color: root.hovering ? theme.colors.accent : outlineColor
         
         color: "transparent"
         opacity: outlineOpacity
@@ -53,7 +55,7 @@ Rectangle {
         anchors.centerIn: parent
         
         font: normalFont
-        color: theme.colors.dark3
+        color: root.hovering ? theme.colors.accent2 : theme.colors.accent
 
         text: label
     }
@@ -68,15 +70,12 @@ Rectangle {
         onClicked: function(mouse) {buttonFunction(mouse)}
 
         onEntered: {
-            bg_color = theme.colors.accent
-            outlineColor = theme.colors.accent
-            labelText.color = theme.colors.bg
+            root.hovering = true
+            
         }
 
         onExited: {
-            bg_color = theme.colors.dark1
-            outlineColor = theme.colors.stroke
-            labelText.color = theme.colors.dark3
+            root.hovering = false
         }
     }
 }

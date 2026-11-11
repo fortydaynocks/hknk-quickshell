@@ -7,6 +7,8 @@ import Quickshell.Widgets
 
 Rectangle {
     id: root
+
+    property bool hovering: false
     
     property string title: "???"
     property string process: ""
@@ -14,8 +16,8 @@ Rectangle {
     anchors.fill: parent
 
     border.width: strokeWidth
-    border.color: theme.colors.dark2
-    color: theme.colors.dark1
+    border.color: root.hovering ? theme.colors.accent : theme.colors.stroke
+    color: root.hovering ? theme.colors.accent : theme.colors.bg
 
     Text {
         id: label
@@ -23,7 +25,7 @@ Rectangle {
         anchors.centerIn: parent
         
         font: normalFont
-        color: theme.colors.dark3
+        color: root.hovering ? theme.colors.accent2 : theme.colors.accent
 
         text: title
     }
@@ -41,15 +43,13 @@ Rectangle {
         }
 
         onEntered: {
-            root.color = theme.colors.accent
-            root.border.color = theme.colors.accent
-            label.color = theme.colors.accent2
+            root.hovering = true
+            
         }
 
         onExited: {
-            root.color = theme.colors.dark1
-            root.border.color = theme.colors.dark2
-            label.color = theme.colors.dark3
+            root.hovering = false
+
         }
     }
 
