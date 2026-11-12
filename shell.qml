@@ -281,17 +281,7 @@ Scope {
             dateProcess.running = true
         }
     }
-
-    //  FIRST START
-    IpcHandler {
-        target: "firstStart"
-
-        function start() {
-            //
-            
-        }
-    }
-
+    
     Connections {
         target: Quickshell
 

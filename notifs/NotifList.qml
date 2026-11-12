@@ -67,11 +67,9 @@ PopupWindow {
                     implicitHeight: notifHeight
 
                     border.width: strokeWidth
-                    border.color: theme.colors.stroke
-                    
-                    opacity: hovering && !dismissing ? 0.5 : 1
+                    border.color: hovering ? theme.colors.dark3 : theme.colors.stroke
 
-                    color: theme.colors.bg
+                    color: hovering ? theme.colors.dark3 : theme.colors.bg
                     clip: true
 
                     RowLayout {
@@ -83,7 +81,7 @@ PopupWindow {
                             implicitWidth: strokeWidth * 2
                             implicitHeight: parent.height
 
-                            color: modelData.urgency == NotificationUrgency.Critical ? theme.colors.critical : theme.colors.accent
+                            color: hovering ? theme.colors.bg : (modelData.urgency == NotificationUrgency.Critical ? theme.colors.critical : theme.colors.accent)
                         }
 
                         ColumnLayout {
@@ -96,9 +94,7 @@ PopupWindow {
                                 elide: Text.ElideRight
 
                                 font: bigFont
-                                color: modelData.urgency == NotificationUrgency.Critical ? theme.colors.critical : theme.colors.accent
-                                
-                                
+                                color: hovering ? theme.colors.bg : (modelData.urgency == NotificationUrgency.Critical ? theme.colors.critical : theme.colors.accent)
 
                                 text: ":: " + modelData.summary.toUpperCase()
                             }
@@ -109,7 +105,7 @@ PopupWindow {
                                 elide: Text.ElideRight
 
                                 font: normalFont
-                                color: theme.colors.dark3
+                                color: hovering ? theme.colors.dark1 : theme.colors.dark3
 
                                 text: " " + modelData.body
                             }
@@ -119,7 +115,7 @@ PopupWindow {
                                 implicitHeight: strokeWidth
                                 visible: modelData.urgency != NotificationUrgency.Critical && !hovering
 
-                                color: theme.colors.dark2
+                                color: hovering ? theme.colors.bg : theme.colors.dark2
                                 
                                 Rectangle {
                                     anchors.left: parent.left
@@ -127,7 +123,7 @@ PopupWindow {
 
                                     implicitWidth: parent.width * (notifPanel.timeLeft / root.notifTimeout)
 
-                                    color: theme.colors.accent
+                                    color: hovering ? theme.colors.bg : theme.colors.accent
                                 }
                             }
                         }
@@ -167,12 +163,14 @@ PopupWindow {
                         acceptedButtons: Qt.LeftButton
                         hoverEnabled: true
 
-                        onClicked: function(mouse) { if (mouse.button == Qt.LeftButton && !notifPanel.dismissing) {
-                            if (modelData.actions.length > 0) {
-                                modelData.actions[0].invoke()
-                            } 
-                            notifPanel.dismissing = true
-                            dismiss()
+                        onClicked: function(mouse) {
+                            if (mouse.button == Qt.LeftButton && !notifPanel.dismissing) {
+                                if (modelData.actions.length > 0) {
+                                    modelData.actions[0].invoke()
+                                }
+
+                                notifPanel.dismissing = true
+                                dismiss()
                             }
                         }
 
@@ -208,13 +206,13 @@ PopupWindow {
                         id: notifTimer
 
                         interval: root.notifTimeout * 1000
-                        onTriggered: { modelData.expire() }
+                        onTriggered: { notifPanel.visible = false }
                     }
 
                     SequentialAnimation {
                         id: notifTimerAnim
 
-                        //PropertyAction { target: notifPanel; property: "timeLeft"; value: root.notifTimeout }
+                        PropertyAction { target: notifPanel; property: "timeLeft"; value: root.notifTimeout }
                         NumberAnimation { target: notifPanel; property: "timeLeft"; from: root.notifTimeout; to: 0; duration: root.notifTimeout * 1000 }
                     }
 

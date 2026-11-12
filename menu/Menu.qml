@@ -6,6 +6,9 @@ import QtQuick.Layouts
 import Quickshell.Widgets
 import QtQuick.Controls
 
+import Quickshell.Wayland
+import Quickshell.Hyprland
+
 import qs.menu.widgets
 import qs.notifs
 import qs.menu.popups
@@ -14,6 +17,7 @@ PopupWindow {
     id: menuRoot
 
     property string iAm: ""
+    property var imOnTheActiveScreen: Hyprland.focusedMonitor.name == panel.screen.name
     property bool safetyLock: false
 
     anchor.window: panel
@@ -24,7 +28,7 @@ PopupWindow {
     implicitHeight: panel.height ? panel.height - (padding * 2) : 600
 
     //  ENABLE FOR STANDARD USE
-    visible: panel.menuShowing
+    visible: false
     grabFocus: true
 
 
@@ -342,14 +346,34 @@ PopupWindow {
         id: hideMenu
         
     }
+
+    Connections {
+        target: barRoot
+
+        function onMenuOpenChanged() {
+            if (barRoot.menuOpen) {
+                visible = menuRoot.imOnTheActiveScreen
+
+            } else {
+                visible = false
+            }
+        }
+    }
     
     onVisibleChanged: {
         if (menuRoot.visible == true) {
             showMenu.restart()
 
         } else {
+            barRoot.menuOpen = false
             //blueOverlay.implicitWidth = menuRoot.width
-
         }
+    }
+
+    Item {
+        anchors.fill: parent
+        focus: true
+
+        Keys.onEscapePressed: { menuRoot.visible = false }
     }
 }

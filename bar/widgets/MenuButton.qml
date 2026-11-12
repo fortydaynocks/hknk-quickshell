@@ -10,7 +10,7 @@ Rectangle {
     implicitWidth: parent.width - (padding * 2)
     implicitHeight: parent.width - (padding * 2)
 
-    color: root.hovering ? theme.colors.dark3 : theme.colors.bg
+    color: hovering || barRoot.menuOpen ? theme.colors.dark3 : theme.colors.bg
     
     Text {
         id: label
@@ -20,7 +20,7 @@ Rectangle {
         font.bold: theme.font.bold
         font.pixelSize: barSize * 0.45
 
-        color: root.hovering ? theme.colors.accent2 : theme.colors.dark3
+        color: hovering || barRoot.menuOpen ? theme.colors.accent2 : theme.colors.dark3
 
         text: theme.menuIcon || "?"
     }
@@ -33,7 +33,7 @@ Rectangle {
 
         onClicked: function(mouse) {
             if (mouse.button == Qt.LeftButton) {
-                panel.toggleMenu(!panel.menuShowing)
+                barRoot.toggleMenu()
 
             }
         }

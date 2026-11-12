@@ -11,13 +11,15 @@ import qs.bar.widgets
 import qs.menu
 
 Scope {
-    id: root
+    id: barRoot
 
     property int barSize: 42
     property int borderSize: 20
 
     property int padding: 4
     property int strokeWidth: 2
+
+    property bool menuOpen: false
 
     Variants {
         model: Quickshell.screens
@@ -125,14 +127,27 @@ Scope {
                         }
                     }
 
-                    Menu { id: menu }
-
-                    function toggleMenu(toggle) {
-                        menu.visible = toggle
-                        
-                    }
+                    Menu {}
                 }      
             }
+        }
+    }
+
+    function toggleMenu(toggle = null) {
+        if (toggle) {
+            barRoot.menuOpen = toggle
+        } else {
+            barRoot.menuOpen = !barRoot.menuOpen
+        }
+    }
+
+    //  COMMAND TO SHOW MENU    --  [  qs ipc call menu toggle ]
+    IpcHandler {
+        target: "bar"
+
+        function toggle() {
+            barRoot.toggleMenu()
+            
         }
     }
 }
