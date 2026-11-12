@@ -31,7 +31,7 @@ Item {
                 font.bold: true
                 font.pointSize: 64
 
-                color: theme.colors.accent
+                color: theme.colors.accent2
 
                 text: shellRoot.timeH
             }
@@ -43,8 +43,8 @@ Item {
                 font.bold: true
                 font.pointSize: 64
 
-                color: theme.colors.accent
-                opacity: 0.5
+                color: theme.colors.accent2
+                //opacity: 0.5
 
                 text: ":" + shellRoot.timeM
             }
@@ -57,8 +57,8 @@ Item {
             font.bold: true
             font.pointSize: 16
 
-            color: theme.colors.accent
-            opacity: 0.5
+            color: theme.colors.accent2
+            //opacity: 0.5
 
             text: shellRoot.date + " "
         }

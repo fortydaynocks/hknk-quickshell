@@ -24,6 +24,7 @@ hard requirements:
 - [run / dmenu] fuzzel
 
 soft requirements:
+- start awww before quickshell
 - your hyprland needs a way to use the theme.json file. decode it and use its properties
 
 if you have feedback, tips or suggestions, they are all welcome!

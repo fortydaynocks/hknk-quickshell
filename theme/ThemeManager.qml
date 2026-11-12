@@ -41,7 +41,7 @@ Singleton {
             property string wallpaper: ""
             property string menuIcon: ""
             property int strokeWidth: 2
-            property real bg_transparency: 0.75
+            property real bg_transparency: 0.8
 
             property var colors: {
                 "bg": Qt.alpha(hellwalJson.json.colors.color0, bg_transparency),
@@ -75,8 +75,7 @@ Singleton {
         }
     }
 
-    //  HELLWAL
-    
+    //  HELLWAL    
 
     //readonly property var themeColors: {
         //"bg": hellwalJson.adapter.colors.color0,

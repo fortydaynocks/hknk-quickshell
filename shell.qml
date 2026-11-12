@@ -197,8 +197,8 @@ Scope {
         myData.wallpaper = wallpaper
 
         //cmd("swaybg -i " + wallpaper)
-        cmd("awww img " + wallpaper + " --transition-type center --transition-duration 1")
-        cmd("hellwal -i " + wallpaper + " -j > " + hellwalPath)
+        cmd("awww img '" + wallpaper + "' --transition-type center --transition-duration 1")
+        cmd("hellwal -i '" + wallpaper + "' -j > " + hellwalPath)
     }
 
     function updateColors() {
@@ -296,7 +296,6 @@ Scope {
         target: Quickshell
 
         function onReloadCompleted() {
-            console.log("BLARGH")
             //console.log(myData.wallpaper)
             //let wpPath = "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-ex2yvo.png"
             //updateTheme(myData.wallpaper)

@@ -59,6 +59,4 @@ RowLayout {
             ColorAnimation { target: sepRight; property: "color"; to: "transparent"; duration: 300 }
         }
     }
-
-    
 }
