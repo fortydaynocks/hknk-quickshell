@@ -49,6 +49,7 @@ Scope {
     //  BATTERY
     property var battery: UPower.displayDevice.isLaptopBattery ? UPower.displayDevice : null
     property real batteryPercentage: battery ? battery.percentage : 0
+    property var batteryState: battery ? battery.state : null
     property int maxBatteryPercentage: 100
 
     //  HYPRLAND
@@ -198,6 +199,7 @@ Scope {
 
         //cmd("swaybg -i " + wallpaper)
         cmd("awww img '" + wallpaper + "' --transition-type center --transition-duration 1")
+        cmd("hellwal -i " + wallpaper)
         cmd("hellwal -i '" + wallpaper + "' -j > " + hellwalPath)
     }
 

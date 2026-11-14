@@ -13,7 +13,7 @@ RowLayout {
     property string batteryBar: ""
     property string batteryBarUnit: "󰝤"
 
-    property var usedColor: batteryPercentage <= 0.2 && battery.state != UPowerDeviceState.Charging ? theme.colors.critical : theme.colors.accent
+    property var usedColor: batteryPercentage <= 0.2 && batteryState != UPowerDeviceState.Charging ? theme.colors.critical : theme.colors.accent
 
     spacing: padding
     Text {

@@ -1,28 +1,28 @@
 {
-  "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/shun-goku-satsu.jpg",
+  "wallpaper": "/home/hekkenok/.config/quickshell/theme/wallpapers/wallhaven-exrgkk.jpg",
   "alpha": "100",
   "special": {
-    "background": "#000000",
-    "foreground": "#c6c6c4",
-    "cursor": "#c6c6c4",
-    "border": "#c6c6c4"
+    "background": "#0a0a0a",
+    "foreground": "#ffe5fc",
+    "cursor": "#ffe5fc",
+    "border": "#ffe5fc"
   },
   "colors": {
-    "color0": "#000000",
-    "color1": "#660605",
-    "color2": "#780202",
-    "color3": "#5d0d0d",
-    "color4": "#9a0d0d",
-    "color5": "#572827",
-    "color6": "#676767",
-    "color7": "#949493",
-    "color8": "#000000",
-    "color9": "#7f0706",
-    "color10": "#960202",
-    "color11": "#741010",
-    "color12": "#c01010",
-    "color13": "#6c3230",
-    "color14": "#808080",
-    "color15": "#c6c6c4"
+    "color0": "#0a0a0a",
+    "color1": "#4f2726",
+    "color2": "#402c2d",
+    "color3": "#5f4141",
+    "color4": "#7a504d",
+    "color5": "#ac514d",
+    "color6": "#785f60",
+    "color7": "#c2acbd",
+    "color8": "#2b2b2b",
+    "color9": "#62302f",
+    "color10": "#503738",
+    "color11": "#765151",
+    "color12": "#986460",
+    "color13": "#d76560",
+    "color14": "#967678",
+    "color15": "#ffe5fc"
   }
 }
